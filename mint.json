@@ -41,7 +41,7 @@
   "navigation": [
     {
       "group": "Home",
-      "pages": ["quickstart", "contributing"]
+      "pages": ["introduction", "quickstart", "cloud", "data-connectors", "contributing"]
     },
     {
       "group": "API Documentation",
