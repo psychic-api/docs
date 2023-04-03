@@ -34,14 +34,14 @@
     },
     {
       "name": "Community",
-      "icon": "discord",
-      "url": "https://mintlify.com/community"
+      "icon": "slack",
+      "url": "https://sidekick-public.slack.com/"
     }
   ],
   "navigation": [
     {
       "group": "Home",
-      "pages": ["introduction", "features"]
+      "pages": ["quickstart", "contributing"]
     },
     {
       "group": "API Documentation",
