@@ -1,10 +1,29 @@
 ---
 title: Quickstart
-description: "Get started running Sidekick locally"
+description: "Start querying your data in 5 minutes"
 ---
 
-## Setting up
-For support and questions, [join our Slack community.](https://join.slack.com/t/sidekick-public/shared_invite/zt-1ra86qug3-~UWNCISLWpNj55Im6C6OaQ)
+## Sidekick Cloud
+Sidekick Cloud is the fastest way to get started querying your data from one or more data sources.
+
+### 1. Create an account at [app.getsidekick.ai](https://app.getsidekick.ai/sign-in)
+
+### 2. Choose the connector you want to sync data from and click `Authorize` to connect.
+<Note>The Google Drive connector is still awaiting verification from Google so you will need to Click on `Advanced` to proceed.</Note>
+
+### 3. Click `Connect` to initiate the data extraction and transformation.
+When you see a `Successfully upserted X chunks` message, it means your data has been successfully loaded into our hosted Weaviate cluster. 
+
+### 5. Test that your content was successfully loaded through the [FastAPI endpoints](https://sidekick-server-ezml2kwdva-uc.a.run.app/docs).
+First you will need to copy your API key from the Sidekick dashboard and use that to authorize yourself in the FastAPI UI or when making requests to the endpoints.
+![CleanShot 2023-04-14 at 18 33 05@2x](https://user-images.githubusercontent.com/14931371/232177714-8a806a38-f36d-4fe6-81f3-6552042cc92c.png)
+
+Paste this into the `Bearer token` field in FastAPI
+![CleanShot 2023-04-14 at 18 34 15@2x](https://user-images.githubusercontent.com/14931371/232177777-c73c3891-96bf-44fb-920e-f657102376b8.png)
+
+
+## Local setup
+Sidekick can be set up locally, but requires quite a bit of work that's not fully documented here. [Join our Slack community](https://join.slack.com/t/sidekick-public/shared_invite/zt-1ra86qug3-~UWNCISLWpNj55Im6C6OaQ) to get help setting Sidekick up locally.
 
 To run Sidekick locally:
 
@@ -34,9 +53,7 @@ To run Sidekick locally:
 
 The server is based on FastAPI so you can view the interactive API documentation at `<local_host_url i.e. http://0.0.0.0:8000>/docs` when you are running it locally.
 
-These are the available API endpoints:
-
-- `/upsert-web-data`: This endpoint takes a `url` as input, uses Playwright to crawl through the webpage (and any linked webpages), and loads them into the vectorstore.
+These are the available API endpoints for querying data:
 
 - `/query`: Endpoint to query the vector database with a string. You can filter by source type (web, markdown, etc.) and set the max number of chunks returned. 
 
