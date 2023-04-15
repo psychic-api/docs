@@ -25,7 +25,7 @@
     {
       "name": "API Reference",
       "icon": "rectangle-terminal",
-      "url": "api-reference"
+      "url": "https://sidekick-server-ezml2kwdva-uc.a.run.app/docs"
     },
     {
       "name": "Changelog",
