@@ -28,11 +28,6 @@
       "url": "https://sidekick-server-ezml2kwdva-uc.a.run.app/docs"
     },
     {
-      "name": "Changelog",
-      "icon": "list",
-      "url": "https://mintlify.com"
-    },
-    {
       "name": "Community",
       "icon": "slack",
       "url": "https://sidekick-public.slack.com/"
@@ -42,10 +37,6 @@
     {
       "group": "Home",
       "pages": ["introduction", "quickstart", "cloud", "data-connectors", "contributing"]
-    },
-    {
-      "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
     },
     {
       "group": "Endpoint Examples",
@@ -58,8 +49,8 @@
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "twitter": "https://twitter.com/getsidekickai",
+    "github": "https://github.com/ai-sidekick/sidekick",
+    "linkedin": "https://www.linkedin.com/company/ai-sidekick/"
   }
 }
