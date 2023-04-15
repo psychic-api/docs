@@ -4,11 +4,13 @@ description: "Start querying your data in 5 minutes"
 ---
 
 ## Sidekick Cloud
-Sidekick Cloud is the fastest way to get started querying your data from one or more data sources.
+Sidekick Cloud is the fastest way to get started querying your data from one or more data sources. Here's how you can get API endpoints to query your data for semantic search or for use with GPT, in less than 10 minutes.
 
 ### 1. Create an account at [app.getsidekick.ai](https://app.getsidekick.ai/sign-in)
 
 ### 2. Choose the connector you want to sync data from and click `Authorize` to connect.
+![CleanShot 2023-04-14 at 18 35 30@2x](https://user-images.githubusercontent.com/14931371/232177876-b3fd0ec0-097f-4dd9-8519-4ba361bd0b68.png)
+
 <Note>The Google Drive connector is still awaiting verification from Google so you will need to Click on `Advanced` to proceed.</Note>
 
 ### 3. Click `Connect` to initiate the data extraction and transformation.
@@ -21,9 +23,12 @@ First you will need to copy your API key from the Sidekick dashboard and use tha
 Paste this into the `Bearer token` field in FastAPI
 ![CleanShot 2023-04-14 at 18 34 15@2x](https://user-images.githubusercontent.com/14931371/232177777-c73c3891-96bf-44fb-920e-f657102376b8.png)
 
+### 6. Build your app
+Using your Sidekick API key, you can query your data from any application. The `/query` endpoint returns chunks of content from your data sources. The `/ask-llm` endpoint makes a call to OpenAI to summarize your content and answer the query in natural language.
+
 
 ## Local setup
-Sidekick can be set up locally, but requires quite a bit of work that's not fully documented here. [Join our Slack community](https://join.slack.com/t/sidekick-public/shared_invite/zt-1ra86qug3-~UWNCISLWpNj55Im6C6OaQ) to get help setting Sidekick up locally.
+Sidekick can be set up locally, but requires quite a lot of work that's not fully documented here. [Join our Slack community](https://join.slack.com/t/sidekick-public/shared_invite/zt-1ra86qug3-~UWNCISLWpNj55Im6C6OaQ) to get help setting Sidekick up locally.
 
 To run Sidekick locally:
 
