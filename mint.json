@@ -36,7 +36,7 @@
   "navigation": [
     {
       "group": "Home",
-      "pages": ["introduction", "quickstart", "cloud", "data-connectors", "contributing"]
+      "pages": ["introduction", "quickstart", "data-connectors", "contributing"]
     },
     {
       "group": "Endpoint Examples",
