@@ -9,18 +9,19 @@ description: "Learn about Sidekick"
 You can use the integrations and chunkers from built by the community to get started quickly, or quickly build new integrations and write custom chunkers for different content types based on Sidekick's `DataConnector` and `DataChunker` specs.
 
 ## Demo
-Get an API key to test out a hosted version by [joining our Slack community.](https://sidekick-public.slack.com/). Post in the #api-keys channel to request a new key. You can test it out on some pre-ingested developer docs by tagging the Sidekick bot in the #sidekick-demo channel.
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/hH09kWi6Si0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 ## Features
-* Scrape HTML pages and chunk them
-* Load Markdown files from a Github repo and chunk them
-* Connect to Weaviate vector store and load chunks
-* FastAPI endpoints to query vector store directly, or perform Q&A with OpenAI models
-* Slackbot interface to perform Q&A with OpenAI models
+* [Dashboard](https://app.getsidekick.ai/sign-in) to manage connectors, handle auth, and run queries
+* Connectors to Zendesk, Notion, Google Drive, Confluence
+* General purpose web scraper for content hosted online but isn't yet available as a Connector
+* FastAPI endpoint to query your Documents from all connected sources
+* FastAPI endpoint to perform Q&A over your Documents
 
 ## Upcoming
-* `DataConnector` and `DataChunker` abstractions to make it easier to contribute new connectors/chunkers
-* Connect to Pinecone, Milvus, and Qdrant vector stores
+* Support for Pinecone, Milvus, and Qdrant vector stores
+* DropBox Connector
+* Query page for dashboard to replace FastAPI UI
+* Data synchronization via scheduling
+* Data synchronization via webhooks when available
