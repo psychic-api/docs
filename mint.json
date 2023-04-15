@@ -52,5 +52,10 @@
     "twitter": "https://twitter.com/getsidekickai",
     "github": "https://github.com/ai-sidekick/sidekick",
     "linkedin": "https://www.linkedin.com/company/ai-sidekick/"
+  },
+  "api": {
+    "auth": {
+        "method": "bearer"
+    }
   }
 }
