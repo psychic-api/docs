@@ -9,22 +9,22 @@ In this tutorial we will set up a Notion connector, try it out as an end user wo
 ### 1. Create an account at [dashboard.getsidekick.ai](https://dashboard.getsidekick.ai)
 
 ### 2. Navigate to the Notion connector and click `Enable Connector`
-<img width="483" alt="CleanShot 2023-05-04 at 14 36 46@2x" src="https://user-images.githubusercontent.com/14931371/236297736-33932011-724a-4dfe-8da5-3566afa9188b.png">
+![](https://user-images.githubusercontent.com/14931371/236297736-33932011-724a-4dfe-8da5-3566afa9188b.png)
 For connectors that support OAuth like Notion, you will need to generate credentials for each application you want your users to connect to and Sidekick will ask your users to connect through your OAuth credentials. Different connectors require different credentials to set up, you can find instructions on how to find each of these credentials in the [Data Connectors page](/data-connectors)
 
 After enabling the connector, the `Enable Connector` button will be disabled while the credentials are verified. If the Connector is successfully enabled, this button should now say `Update Credentials`
 
 ### 3. Navigate to the `Playground` tab to test out the connector
 Now that the Connector is set up, you can test out what your users will see from the `Playground` tab.
-<img width="931" alt="CleanShot 2023-05-04 at 14 39 35@2x" src="https://user-images.githubusercontent.com/14931371/236298347-5415e994-010c-4c3a-b9b2-a42b75c48028.png">
+![](https://user-images.githubusercontent.com/14931371/236298347-5415e994-010c-4c3a-b9b2-a42b75c48028.png)
 
 Enter a Connection ID that uniquely identifies the Notion workspace you're trying to connect to and press `Connect to Notion`. Follow the steps in the Notion OAuth flow and choose which pages from your Notion workspace you want to ingest.
 
 ### 4. Test that you've successfully connected to your Notion workspace
 First you will need to get your API key from the [Sidekick dashboard](https://dashboard.getsidekick.ai/api-keys) and use that to authorize yourself when making requests to retrieve documents through one of your connections. The secret API key should only be used from your server-side code, while the public key can be used from anywhere.
-![CleanShot 2023-05-04 at 15 02 25@2x](https://user-images.githubusercontent.com/14931371/236303471-d1948396-f185-4af5-b034-3b63ca4ea03e.png)
+![](https://user-images.githubusercontent.com/14931371/236303471-d1948396-f185-4af5-b034-3b63ca4ea03e.png)
 
 Then, visit [https://sidekick-server-ezml2kwdva-uc.a.run.app/docs](https://sidekick-server-ezml2kwdva-uc.a.run.app/docs). Paste your API key into the `Bearer token` field in FastAPI
-![CleanShot 2023-04-14 at 18 34 15@2x](https://user-images.githubusercontent.com/14931371/232177777-c73c3891-96bf-44fb-920e-f657102376b8.png)
+![](https://user-images.githubusercontent.com/14931371/232177777-c73c3891-96bf-44fb-920e-f657102376b8.png)
 
 Use the `/get-documents` endpoint to test that you can retrieve the Notion pages you shared with Sidekick. You can also verify the connection was successful by going to the `Active Connections` tab in the Notion dashboard.
