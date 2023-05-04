@@ -1,0 +1,69 @@
+---
+title: Data Connectors
+description: "Catalogue of data connectors available"
+---
+
+
+## [Website](https://app.getsidekick.ai/connectors/website)
+Sidekick supports ingesting content from the web by spinning up a headless browser with [Playwright](https://github.com/microsoft/playwright-python) and scraping content from a list of web pages. The Connector will extract all elements on every page that matches the CSS selector, convert the contents to text, and ingest the text into a vector database.
+
+### Auth
+The Website Connector only works on public websites and does not require authentication or authorization.
+
+### Configuration
+The Website Connector requires the following as input:
+- Comma-separated list of URLs to scrape
+- A [CSS selector](https://www.w3schools.com/cssref/css_selectors.php)
+
+## [Google Drive](https://app.getsidekick.ai/connectors/google-drive)
+Sidekick supports connecting to Google Drive and ingesting Docs files. PDFs, Slides, and other filetypes are not currently supported.
+
+### Auth
+The Google Drive Connector uses OAuth 2.0. We are currently awaiting approval from Google so you will see a scary message warning you that our app isn't verified. Just click `Advanced` and then `Proceed` in the bottom left.
+![CleanShot 2023-04-14 at 18 37 41@2x](https://user-images.githubusercontent.com/14931371/232183192-42fc2a9e-89f4-4140-b59a-4a2c6540c7cd.png)
+
+### Configuration
+The Google Drive Connector requires the following as input:
+- The path to the directory with the files you want to ingest, relative to your root Drive. e.g. `SidekickTesting` for a directory in the root Drive, or `someFolder/SidekickTesting` for a nested directory.
+
+## [Notion](https://app.getsidekick.ai/connectors/notion)
+Sidekick supports connecting to Notion to ingest pages from a Notion workspace.
+
+### Auth
+Connecting to Notion is a bit awkward. You'll have to first follow [these instructions](https://developers.notion.com/docs/create-a-notion-integration) to create a new Notion integration, and give it access to your workspace. Then, you will need to [add your integration as a connection](https://developers.notion.com/docs/create-a-notion-integration#step-2-share-a-database-with-your-integration) to every Notion page you want to ingest. Finally, find and copy the `Internal Integration Token` from Notion - you will need this to run the Notion connector.
+![CleanShot 2023-04-14 at 21 46 52@2x](https://user-images.githubusercontent.com/14931371/232183687-c96e105f-f987-4248-bf17-8675640b9abf.png)
+
+### Configuration
+The Notion Connector requires the following as input:
+- The `Internal Integration Token` from your Notion integration
+
+Once you click `Connect`, Sidekick will ingest the contents of every page that you've added your integration to in your Notion workspace.
+
+## [Confluence](https://app.getsidekick.ai/connectors/confluence)
+Sidekick supports connecting to Confluence and ingesting all pages from a Confluence Space.
+
+### Auth
+Connecting to Confluence requires several fields:
+- An [API key](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/) for your Confluence account
+- The email associated with your Confluence account
+- The subdomain of your Confluence account. E.g. for `sidekick.atlassian.net` the subdomain is `sidekick`
+
+### Configuration
+The Confluence Connector requires the following as input:
+- The ID of the Confluence space you want to ingest. E.g. for `https://sidekick.atlassian.net/wiki/spaces/SD/overview` the Space ID is `SD`.
+
+Once you click `Connect`, Sidekick will ingest the contents of every page in the Confluence Space you specified.
+
+## [Zendesk](https://app.getsidekick.ai/connectors/zendesk)
+Sidekick supports connecting to Zendesk and ingesting all [Articles](https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/) in the Zendesk account.
+
+### Auth
+Connecting to Confluence requires several fields:
+- An [API key](https://support.zendesk.com/hc/en-us/articles/4408889192858-Generating-a-new-API-token) for your Zendesk account
+- The email associated with your Zendesk account
+- The subdomain of your Zendesk account. E.g. for `sidekick.atlassian.net` the subdomain is `sidekick`
+
+### Configuration
+The Zendesk Connector does not require any additional configuration.
+
+Once you click `Connect`, Sidekick will ingest the contents of every Article in the Zendesk account. For accounts with a large number of Articles, this can take a long time.
