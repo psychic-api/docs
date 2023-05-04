@@ -4,25 +4,29 @@ description: "Learn about Sidekick"
 ---
 
 ## 🚚 What is Sidekick
-[Sidekick](https://getsidekick.ai/) is a platform for connecting to SaaS tools like Salesforce, Github, Notion, Zendesk and syncing data between these applications and a vector database. This allows developers to run semantic search queries on data from a variety of sources from a single API endpoint. The results of these queries can be used downstream as context for a LLM prompt, or just as search results delivered to the end user.
+[Sidekick](https://getsidekick.ai/) is a tool to connect to your customer's SaaS tools like Notion, Zendesk, Confluence, and Google Drive and sync documents from these applications to your SQL or vector database. You can think of it like Plaid for unstructured text documents. Sidekick is easy to set up - you use it by importing the NPM package and configuring it with your Sidekick API key, which you can get from the [Sidekick dashboard](http://dashboard.getsidekick.ai/). When your users connect their applications, you can view these connections from the dashboard.
 
-You can use the integrations and chunkers from built by the community to get started quickly, or quickly build new integrations and write custom chunkers for different content types based on Sidekick's `DataConnector` and `DataChunker` specs.
+Use cases:
+* **For generative AI startups:** Ingest your users' documents into a vector database and use load document chunks into in your prompts.
+* **For B2B companies:** Accelerate customer onboarding by letting your customers share documents with you with just a few clicks.
+
 
 ## 🎥 Demo
 <iframe width="560" height="315" src="https://www.youtube.com/embed/hH09kWi6Si0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 ## 💎 Features
-* [Dashboard](https://app.getsidekick.ai/sign-in) to manage connectors, handle auth, and run queries
+* [Dashboard](https://app.getsidekick.ai/sign-in) to manage connections, handle auth, define data schemas, and run test queries
 * API Connectors to Zendesk, Notion, Google Drive, Confluence
 * General purpose web scraper for all other content
-* Support for Weaviate and Pinecone vector databases
-* FastAPI endpoint to query your Documents from all connected sources
-* FastAPI endpoint to perform Q&A over your Documents
+* Support for chunking and generating embeddings from synced documents automatically
+* Support for Weaviate and Pinecone vector databases as destinations
+* Endpoint to query your Documents from all connected sources
+* Endpoint to perform Q&A over your Documents
 
 ## 🚧 Upcoming
 * Support for Milvus, and Qdrant vector stores
+* Slack Connector
 * DropBox Connector
-* Query page for dashboard to replace FastAPI UI
-* Data synchronization via scheduling
-* Data synchronization via webhooks when available
+* Scheduled data synchronization
+* Webhook-based data synchronization, for APIs where webhooks are available
