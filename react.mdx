@@ -1,0 +1,65 @@
+---
+title: React
+description: "How to use Sidekick Link in your React project"
+---
+
+## Sidekick Cloud
+Sidekick Cloud is the fastest way to get started querying your data from one or more data sources. Here's how you can get API endpoints to query your data for semantic search or for use with GPT, in less than 10 minutes.
+
+### 1. Create an account at [app.getsidekick.ai](https://app.getsidekick.ai/sign-in)
+
+### 2. [Choose the Connector](/data-connectors) you want to sync data from and click `Authorize` to connect.
+![CleanShot 2023-04-14 at 18 35 30@2x](https://user-images.githubusercontent.com/14931371/232177876-b3fd0ec0-097f-4dd9-8519-4ba361bd0b68.png)
+
+<Note>The Google Drive connector is still awaiting verification from Google so you will need to Click on `Advanced` to proceed.</Note>
+
+### 3. Click `Connect` to initiate the data extraction and transformation.
+When you see a `Successfully upserted X chunks` message, it means your data has been successfully loaded into our hosted Weaviate cluster. 
+
+### 5. Test that your content was successfully loaded through the [FastAPI endpoints](https://sidekick-server-ezml2kwdva-uc.a.run.app/docs).
+First you will need to copy your API key from the Sidekick dashboard and use that to authorize yourself in the FastAPI UI or when making requests to the endpoints.
+![CleanShot 2023-04-14 at 18 33 05@2x](https://user-images.githubusercontent.com/14931371/232177714-8a806a38-f36d-4fe6-81f3-6552042cc92c.png)
+
+Paste this into the `Bearer token` field in FastAPI
+![CleanShot 2023-04-14 at 18 34 15@2x](https://user-images.githubusercontent.com/14931371/232177777-c73c3891-96bf-44fb-920e-f657102376b8.png)
+
+### 6. Build your app
+Using your Sidekick API key, you can query your data from any application. The `/query` endpoint returns chunks of content from your data sources. The `/ask-llm` endpoint makes a call to OpenAI to summarize your content and answer the query in natural language.
+
+
+## Local setup
+Sidekick can be set up locally, but requires quite a lot of work that's not fully documented here. [Join our Slack community](https://join.slack.com/t/sidekick-public/shared_invite/zt-1ra86qug3-~UWNCISLWpNj55Im6C6OaQ) to get help setting Sidekick up locally.
+
+To run Sidekick locally:
+
+1. Install Python 3.10, if not already installed.
+2. Clone the repository: `git clone https://github.com/ai-sidekick/sidekick.git`
+3. Navigate to the `sidekick-server` directory: `cd /path/to/sidekick/sidekick-server`
+4. Install poetry: `pip install poetry`
+5. Create a new virtual environment with Python 3.10: `poetry env use python3.10`
+6. Install `poetry-dotenv`: `poetry self add poetry-dotenv`
+7. Activate the virtual environment: `poetry shell`
+8. Install app dependencies: `poetry install`
+9. Set the required environment variables in a `.env` file in `sidekick-server`:
+
+   ```
+   DATASTORE=weaviate
+   BEARER_TOKEN=<your_bearer_token> // Can be any string when running locally. e.g. 22c443d6-0653-43de-9490-450cd4a9836f
+   OPENAI_API_KEY=<your_openai_api_key>
+   WEAVIATE_HOST=<Your Weaviate instance host address> // Optional, defaults to http://127.0.0.1
+   WEAVIATE_PORT=<Your Weaviate port number> // Optional, defaults to 8080. Should be set to 443 for Weaviate Cloud
+   WEAVIATE_INDEX=<Your chosen Weaviate class/collection name to store your chunks> // e.g. MarkdownChunk
+   ```
+   Note that we currently only support weaviate as the data store. You can [run Weaviate locally with Docker](https://weaviate.io/developers/weaviate/quickstart/installation#running-weaviate-with-docker) or [set up a sandbox cluster](https://weaviate.io/developers/weaviate/quickstart/installation#create-a-weaviate-cluster) to get a Weaviate host address.
+10. Run the API locally: `poetry run start`
+11. Access the API documentation at `http://0.0.0.0:8000/docs` and test the API endpoints (make sure to add your bearer token).
+
+### API Endpoints
+
+The server is based on FastAPI so you can view the interactive API documentation at `<local_host_url i.e. http://0.0.0.0:8000>/docs` when you are running it locally.
+
+These are the available API endpoints for querying data:
+
+- `/query`: Endpoint to query the vector database with a string. You can filter by source type (web, markdown, etc.) and set the max number of chunks returned. 
+
+- `/ask-llm`: Endpoint to get an answer to a question from an LLM, based on the data in the vectorstore. In the response, you get back the sources used in the answer, the user's intent, and whether or not the question is answerable based on the content in your vectorstore. 
