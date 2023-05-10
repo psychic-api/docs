@@ -8,9 +8,21 @@ You can use the `/get-documents` endpoint to pull all Document-type data from th
 
 
 ### 1. Get Secret API Key
+Get your secret key from the [Sidekick dashboard](https://dashboard.getsidekick.ai/api-keys). This is used to authenticate requests from your server.
+![](https://github.com/ai-sidekick/docs/assets/14931371/b8d5d552-f909-4fcc-8a8a-a2ef8b35a603)
 
 
 ### 2. Make a request from a server
+Make an http request to `https://sidekick-ezml2kwdva-uc.a.run.app/get_documents` with your secret key as the bearer token, and with the following body:
+
+```json
+{
+  "connector_id": "notion",
+  "connection_id": "user99_notion"
+}
+```
+
+You can also test out document fetching from our [API playground](https://sidekick-ezml2kwdva-uc.a.run.app/docs#/default/get_documents_get_documents_post).
 
 ## Future
 * Sidekick Push: define an endpoint to receive data, instead of having to poll for data.
