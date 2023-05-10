@@ -36,7 +36,7 @@
   "navigation": [
     {
       "group": "Home",
-      "pages": ["introduction", "quickstart-connectors", "data-connectors", "contributing"]
+      "pages": ["introduction", "quickstart-connectors", "data-connectors", "react", "contributing"]
     }
   ],
   "footerSocials": {
