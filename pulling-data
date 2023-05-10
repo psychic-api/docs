@@ -4,10 +4,11 @@ description: "How to fetch Documents and Conversations for each of your connecti
 ---
 
 ## Sidekick Pull
-
+You can use the `/get-documents` endpoint to pull all Document-type data from the connections your customers have established.
 
 
 ### 1. Get Secret API Key
+
 
 ### 2. Make a request from a server
 
