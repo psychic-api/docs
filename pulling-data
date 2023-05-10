@@ -1,0 +1,17 @@
+---
+title: Sidekick Pull
+description: "How to fetch Documents and Conversations for each of your connections"
+---
+
+## Sidekick Pull
+
+
+
+### 1. Get Secret API Key
+
+### 2. Make a request from a server
+
+## Future
+* Sidekick Push: define an endpoint to receive data, instead of having to poll for data.
+* Webhooks: get pushed data only when changes are detected.
+* Incremental syncs: receive only incremental changes to your customers resources, instead of all resources every time.
