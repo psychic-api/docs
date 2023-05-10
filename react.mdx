@@ -11,16 +11,52 @@ Sidekick Link is a React SDK to help your users connect their accounts to Sideki
 
 
 ### 1. Install Sidekick Link
+```bash
+npm install @psychicdev/link
+```
 
 ### 2. Import it into your project
-
+```javascript
+import { usePsychicLink } from @psychicdev/link
+```
 
 ### 3. Configure Sidekick Link with your API key and a callback function
-
+Unpack the functions and state variables.
+```javascript
+const { open, isReady, isLoading, error } = usePsychicLink(publicKey, psychicCallback) 
+```
+* `open` is a function that opens the Sidekick Link modal to prompt your user to connect their account
+* `isReady` is a boolean that indicates whether Sidekick Link is initialized and ready to be shown
+* `isLoading` is a boolean that indicates whether your application is still waiting for a connection. `isLoading` will be `true` as long as no window event has been received from the Sidekick Link modal indicating the connection was successful.
+* `error` is null, or a string describing why Sidekick Link failed to establish a connection. If `error` is not null, it means something has gone wrong and you should handle the error.
+* `publicKey` should be your public API key from Sidekick, which you can get from the [Sidekick dashboard](https://dashboard.getsidekick.ai).
+* `psychicCallback` is a callback function that will be called once a connection is successfully established.
 
 ### 5. Programatically set a Connection ID
+The connection ID should be unique for every user + connection pair. For example, a user with ID `1234` connecting to Notion should have a Connection ID that uniquely identifies the tuple (`1234`, `notion`). Beyond those constraints, a connectionID can be any alphanumeric string.
+
+```javascript
+const connectionID = `user12345_notion`
+```
 
 ### 6. Trigger the modal
-
+Call `open` (or whatever variable that you unpacked it into) with the Connection ID to open the Sidekick Link modal as a new window and initiate the connection flow. You can decide when and how to trigger this flow from your application.
+```javascript
+<button onClick={() => {
+    open(connectionId)
+  }} >
+  Connect to Notion
+</button>
+```
 
 ### 6. Handle success or errors
+If the connection is successful, you can implement the handling logic from the callback provided to `usePsychicLink`. Typically, you'll want to show the user a message saying the connection was sucessful, and send a request to your server to [fetch the Documents]('/pulling-data') from this new connection.
+
+For example:
+```javascript
+const psychicCallback = (newConnectionId: string) => {
+  setNewConnectionId(newConnectionId)
+  setSuccessMessage(`Successfully created connection ${newConnectionId}`)
+  fetchDocumentsFromServer(newConnectionId)
+}
+```
