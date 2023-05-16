@@ -1,0 +1,22 @@
+---
+title: Confluence Connector
+description: "Sidekick supports ingesting pages from a Confluence Space."
+---
+The `connector_id` for Confluence is `confluence`.
+
+## Authorization Type
+Sidekick uses [OAuth 2.0](https://developer.atlassian.com/server/confluence/confluence-oauth2-provider-api/) to connect to Confluence.
+
+## Authorization Flow
+<Accordion title="Show screenshots">
+<img width="400" src="https://github.com/ai-sidekick/docs/assets/14931371/b1bfcce1-b5b9-4486-b096-560a862f73d" />
+</Accordion>
+
+## Configuration
+
+### Custom OAuth Credentials
+By default, Sidekick will use our Confluence OAuth credentials to connect to your customer's accounts. If you want to use your own credentials instead, you can 
+
+
+## Synchronization
+All pages in the Confluence space chosen during the authorization step are synced to Sidekick on a daily basis. These documents can be fetched from the `/get-documents` endpoint as needed. Each call to this endpoint will fetch the most up to date documents from the Confluence space associated with the provided `connection_id`. 

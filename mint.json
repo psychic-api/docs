@@ -14,14 +14,19 @@
   "topbarLinks": [
     {
       "name": "Documentation",
-      "url": "https://mintlify.com/docs"
+      "url": "https://docs.getsidekick.ai"
     }
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "https://github.com/mintlify/starter"
+    "url": "https://dashboard.getsidekick.ai"
   },
   "anchors": [
+    {
+      "name": "Connectors",
+      "icon": "plug",
+      "url": "connectors"
+    },
     {
       "name": "API Reference",
       "icon": "rectangle-terminal",
@@ -35,8 +40,12 @@
   ],
   "navigation": [
     {
-      "group": "Home",
-      "pages": ["introduction", "quickstart-connectors", "data-connectors", "react", "contributing"]
+      "group": "Getting Started",
+      "pages": ["introduction", "quickstart-connectors", "data-connectors", "sidekick-link", "contributing"]
+    },
+    {
+      "group": "Sidekick Connectors",
+      "pages": ["connectors/confluence", "connectors/gdrive", "connectors/notion", "connectors/slack", "connectors/zendesk"]
     }
   ],
   "footerSocials": {
