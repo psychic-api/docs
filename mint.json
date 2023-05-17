@@ -41,7 +41,7 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["introduction", "quickstart-connectors", "data-connectors", "sidekick-link", "contributing"]
+      "pages": ["introduction", "quickstart", "sidekick-dashboard", "sidekick-link", "contributing"]
     },
     {
       "group": "Sidekick Connectors",
