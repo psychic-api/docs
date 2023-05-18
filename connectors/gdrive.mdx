@@ -1,23 +1,23 @@
 ---
 title: Google Drive Connector
-description: "Sidekick supports connecting to Google Drive to ingest `.doc`, `.docx` and `.pdf` files from a single folder in Google Drive."
+description: "Psychic supports connecting to Google Drive to ingest `.doc`, `.docx` and `.pdf` files from a single folder in Google Drive."
 ---
 
 The `connector_id` for Notion is `gdrive`.
 
 ## Authorization Type
-Sidekick uses Google's [OAuth 2.0 implementation](https://developers.google.com/identity/openid-connect/openid-connect) to connect to Google Drive.
+SidekiPsychicck uses Google's [OAuth 2.0 implementation](https://developers.google.com/identity/openid-connect/openid-connect) to connect to Google Drive.
 
 ## Authorization Flow
 When your users authorize their Google account, they will need to enter the URL of a folder in their Drive that contains the documents they want to sync.
 <Accordion title="Show screenshots">
-<img width="400" src="https://github.com/ai-sidekick/docs/assets/14931371/b39adf9d-f8b8-4473-89c3-bdc6b73fea4a" />
-<img width="400" src="https://github.com/ai-sidekick/docs/assets/14931371/df12972f-0d5c-44b3-b21a-e3a4e6100cc4" />
+<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/b39adf9d-f8b8-4473-89c3-bdc6b73fea4a" />
+<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/df12972f-0d5c-44b3-b21a-e3a4e6100cc4" />
 </Accordion>
-<Note>Sidekick is still awaiting approval from Google Cloud for our OAuth application. This means your users will see a warning when connecting their Google account. 
+<Note>Psychic is still awaiting approval from Google Cloud for our OAuth application. This means your users will see a warning when connecting their Google account. 
 They will need to click on "Advanced" in the warning page to bypass it.</Note>
 <Frame>
-<img width="400" src="https://github.com/ai-sidekick/docs/assets/14931371/54edad5a-bcd2-4b4d-a77e-f949422ed0f4" />
+<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/54edad5a-bcd2-4b4d-a77e-f949422ed0f4" />
 </Frame>
 
 ## Configuration
@@ -25,4 +25,4 @@ They will need to click on "Advanced" in the warning page to bypass it.</Note>
 There are no configuration options for Google Drive at the moment.
 
 ## Synchronization
-Documents are synced from Google Drive to Sidekick on a daily basis. These documents can be fetched from the `/get-documents` endpoint on an as-needed basis. Each call to this endpoint will fetch the most up to date documents from the Google Drive folder associated with the provided `connection_id`. 
+Documents are synced from Google Drive to Psychic on a daily basis. These documents can be fetched from the `/get-documents` endpoint on an as-needed basis. Each call to this endpoint will fetch the most up to date documents from the Google Drive folder associated with the provided `connection_id`. 

@@ -1,17 +1,17 @@
 ---
-title: Sidekick Link
-description: "How to use Sidekick Link in your React project"
+title: Psychic Link
+description: "How to use Psychic Link in your React project"
 ---
 
-## Sidekick Link
-Sidekick Link is a React SDK to help your users connect their accounts to Sidekick through a simple UI. 
+## Psychic Link
+Psychic Link is a React SDK to help your users connect their accounts to Psychic through a simple UI. 
 Instead of playing email tag to get API keys and other secrets, you can add Link to your React project or generate a magic URL that can be shared with the right people at your customer's company.
 
-![](https://github.com/ai-sidekick/docs/assets/14931371/f0a78398-cff3-43c0-b832-56e0555fcd91)
-![](https://github.com/ai-sidekick/docs/assets/14931371/96b1371e-3fe1-4c8c-96b1-1796da75ff20)
+![](https://github.com/psychicapi/docs/assets/14931371/f0a78398-cff3-43c0-b832-56e0555fcd91)
+![](https://github.com/psychicapi/docs/assets/14931371/96b1371e-3fe1-4c8c-96b1-1796da75ff20)
 
 
-### 1. Install Sidekick Link
+### 1. Install Psychic Link
 ```bash
 npm install @psychicdev/link
 ```
@@ -21,16 +21,16 @@ npm install @psychicdev/link
 import { usePsychicLink } from @psychicdev/link
 ```
 
-### 3. Configure Sidekick Link with your API key and a callback function
+### 3. Configure Psychic Link with your API key and a callback function
 Unpack the functions and state variables.
 ```javascript
 const { open, isReady, isLoading, error } = usePsychicLink(publicKey, psychicCallback) 
 ```
-* `open` is a function that opens the Sidekick Link modal to prompt your user to connect their account
-* `isReady` is a boolean that indicates whether Sidekick Link is initialized and ready to be shown
-* `isLoading` is a boolean that indicates whether your application is still waiting for a connection. `isLoading` will be `true` as long as no window event has been received from the Sidekick Link modal indicating the connection was successful.
-* `error` is null, or a string describing why Sidekick Link failed to establish a connection. If `error` is not null, it means something has gone wrong and you should handle the error.
-* `publicKey` should be your public API key from Sidekick, which you can get from the [Sidekick dashboard](https://dashboard.getsidekick.ai).
+* `open` is a function that opens the Psychic Link modal to prompt your user to connect their account
+* `isReady` is a boolean that indicates whether Psychic Link is initialized and ready to be shown
+* `isLoading` is a boolean that indicates whether your application is still waiting for a connection. `isLoading` will be `true` as long as no window event has been received from the Psychic Link modal indicating the connection was successful.
+* `error` is null, or a string describing why Psychic Link failed to establish a connection. If `error` is not null, it means something has gone wrong and you should handle the error.
+* `publicKey` should be your public API key from Psychic, which you can get from the [Psychic dashboard](https://dashboard.psychic.dev).
 * `psychicCallback` is a callback function that will be called once a connection is successfully established.
 
 ### 5. Programatically set a Connection ID
@@ -41,7 +41,7 @@ const connectionID = `user12345_notion`
 ```
 
 ### 6. Trigger the modal
-Call `open` (or whatever variable that you unpacked it into) with the Connection ID to open the Sidekick Link modal as a new window and initiate the connection flow. You can decide when and how to trigger this flow from your application.
+Call `open` (or whatever variable that you unpacked it into) with the Connection ID to open the Psychic Link modal as a new window and initiate the connection flow. You can decide when and how to trigger this flow from your application.
 ```javascript
 <button onClick={() => {
     open(connectionId)
@@ -63,4 +63,4 @@ const psychicCallback = (newConnectionId: string) => {
 ```
 
 ### 7. Fetch documents
-After your users have connected with Sidekick, you can fetch the documents they've shared by making an API call from your server. See [Pulling Data](('/pulling-data')) for instructions
+After your users have connected with Psychic, you can fetch the documents they've shared by making an API call from your server. See [Pulling Data](('/pulling-data')) for instructions

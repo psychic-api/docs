@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Documentation Starter Kit",
+  "name": "Sidekick Documentation",
   "logo": {
     "dark": "/logo/dark.png",
     "light": "/logo/light.png"
@@ -14,12 +14,12 @@
   "topbarLinks": [
     {
       "name": "Documentation",
-      "url": "https://docs.getsidekick.ai"
+      "url": "https://docs.psychic.dev"
     }
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "https://dashboard.getsidekick.ai"
+    "url": "https://dashboard.psychic.dev"
   },
   "anchors": [
     {
@@ -41,17 +41,17 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["introduction", "quickstart", "sidekick-dashboard", "sidekick-link", "contributing"]
+      "pages": ["introduction", "quickstart", "psychic-dashboard", "psychic-link", "contributing"]
     },
     {
-      "group": "Sidekick Connectors",
+      "group": "Psychic Connectors",
       "pages": ["connectors/confluence", "connectors/gdrive", "connectors/notion", "connectors/slack", "connectors/zendesk"]
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/getsidekickai",
-    "github": "https://github.com/ai-sidekick/sidekick",
-    "linkedin": "https://www.linkedin.com/company/ai-sidekick/"
+    "twitter": "https://twitter.com/psychicapi",
+    "github": "https://github.com/psychicapi/psychic",
+    "linkedin": "https://www.linkedin.com/company/psychicdev/"
   },
   "api": {
     "auth": {

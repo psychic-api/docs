@@ -3,42 +3,42 @@ title: Quickstart
 description: "Connect to Notion and get back documents in 10 minutes"
 ---
 
-## Sidekick Quickstart
+## Psychic Quickstart
 In this tutorial we will set up a Notion connector, try it out as an end user would experience it, and use it to fetch documents from a Notion workspace.
 
-<Note>Sidekick will rebrand to Psychic.dev soon, so if you see any reference to psychic.dev in the Docs or libraries, just know it's the same product!</Note>
+<Note>Psychic used to be called Sidekick, so if you see any reference to Sidekick in the Docs or libraries, just know it's the same product!</Note>
 
-### 1. Create an account at [dashboard.getsidekick.ai](https://dashboard.getsidekick.ai)
+### 1. Create an account at [dashboard.psychic.dev](https://dashboard.psychic.dev)
 
 ### 2. Navigate to the Notion connector
-Sidekick will use our own OAuth credentials by default for every connector, which makes it easy to get started without having to set up development accounts with every data source. If you would like to use your own OAuth credentials instead, you can find instructions on how to find each of these credentials in the [Data Connectors page](/data-connectors)
+Psychic will use our own OAuth credentials by default for every connector, which makes it easy to get started without having to set up development accounts with every data source. If you would like to use your own OAuth credentials instead, you can find instructions on how to find each of these credentials in the [Data Connectors page](/data-connectors)
 
 ### 3. Navigate to the `Playground` tab to test out the connector
-You can test out what your users will see from the `Playground` tab. This loads the Sidekick Link component for 
-<img width="400" src="https://github.com/ai-sidekick/docs/assets/14931371/6a0ef4aa-f455-48ac-92ee-8b828b7e1398"/>
+You can test out what your users will see from the `Playground` tab. This loads the Psychic Link component for 
+<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/6a0ef4aa-f455-48ac-92ee-8b828b7e1398"/>
 
 Enter a Connection ID that uniquely identifies the Notion workspace you're trying to connect to. In production, the Connection ID should be unique for every (user, data source) tuple. For example, if one of your users with ID `1234` connects to Notion, you can use something like `1234+notion` to uniquely identify the connection
 
-Press `Connect to Notion` and follow the steps in the Sidekick Link modal. Choose which pages from your Notion workspace you want to ingest.
+Press `Connect to Notion` and follow the steps in the Psychic Link modal. Choose which pages from your Notion workspace you want to ingest.
 
 ### 4. Test that you've successfully connected to your Notion workspace
-<img width="400" src="https://github.com/ai-sidekick/docs/assets/14931371/07770b1c-8b5f-4e53-a95d-69cadcfdfdbc"/>
+<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/07770b1c-8b5f-4e53-a95d-69cadcfdfdbc"/>
 
 Refresh the page and go to the `Active Connections` tab to see if the connection with the Connection ID you set now appears in the table. 
 
 ### 4. Fetch documents from the Notion workspace you just connected to
-First you will need to get your API key from the [Sidekick dashboard](https://dashboard.getsidekick.ai/api-keys) and use that to authorize yourself when making requests to retrieve documents through one of your connections. The secret API key should only be used from your server-side code, while the public key can be used from anywhere.
+First you will need to get your API key from the [Psychic dashboard](https://dashboard.psychic.dev/api-keys) and use that to authorize yourself when making requests to retrieve documents through one of your connections. The secret API key should only be used from your server-side code, while the public key can be used from anywhere.
 <img width="400" src="https://user-images.githubusercontent.com/14931371/236303471-d1948396-f185-4af5-b034-3b63ca4ea03e.png" />
 
 Then, visit [https://sidekick-ezml2kwdva-uc.a.run.app/docs](https://sidekick-ezml2kwdva-uc.a.run.app/docs#/). Paste your API key into the `Bearer token` field in FastAPI
 <img width="400" src="https://user-images.githubusercontent.com/14931371/232177777-c73c3891-96bf-44fb-920e-f657102376b8.png" />
 
-Use the `/get-documents` endpoint to test that you can retrieve the Notion pages you shared with Sidekick. You will need to provide the Connection ID you set in step 3, as well as `notion` as the Connector ID.
+Use the `/get-documents` endpoint to test that you can retrieve the Notion pages you shared with Psychic. You will need to provide the Connection ID you set in step 3, as well as `notion` as the Connector ID.
 
 ## Conclusion
-That's it! You've tested what it will be like for your users to connect their Notion pages with Sidekick and for you to query them once connected.
+That's it! You've tested what it will be like for your users to connect their Notion pages with Psychic and for you to query them once connected.
 
 ### Next Steps
-1. Install the [Sidekick React SDK ](https://www.npmjs.com/package/@psychicdev/link) to load the Link component into your own project.
-2. Configure your brand name and logo from the Sidekick Dashboard so your users know who they're connecting to.
+1. Install the [Psychic React SDK ](https://www.npmjs.com/package/@psychicdev/link) to load the Link component into your own project.
+2. Configure your brand name and logo from the Psychic Dashboard so your users know who they're connecting to.
 3. Set up your server-side code to make API calls to `https://sidekick-ezml2kwdva-uc.a.run.app/get-documents` any time you need to fetch documents from your users' Notion workspaces.

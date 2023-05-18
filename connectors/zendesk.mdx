@@ -1,20 +1,20 @@
 ---
 title: Zendesk Connector
-description: "Sidekick supports ingesting articles from Zendesk Help Center."
+description: "Psychic supports ingesting articles from Zendesk Help Center."
 ---
 The `connector_id` for Zendesk is `zendesk`.
 
-<Tip>**Upcoming:** Sidekick will also support ingesting data from Zendesk's Ticketing and CRM products. </Tip>
+<Tip>**Upcoming:** Psychic will also support ingesting data from Zendesk's Ticketing and CRM products. </Tip>
 
 ## Authorization Type
-Sidekick uses [API Keys](https://support.zendesk.com/hc/en-us/articles/4408889192858-Generating-a-new-API-token) to connect to Zendesk. 
+Psychic uses [API Keys](https://support.zendesk.com/hc/en-us/articles/4408889192858-Generating-a-new-API-token) to connect to Zendesk. 
 
-<Tip>We are currently awaiting Zendesk approval for the Sidekick OAuth application, after which we will use OAuth 2.0 to connect to Zendesk accounts.. </Tip>
+<Tip>We are currently awaiting Zendesk approval for the Psychic OAuth application, after which we will use OAuth 2.0 to connect to Zendesk accounts.. </Tip>
 
 ## Authorization Flow
 <Accordion title="Show screenshots">
-<img width="400" src="https://github.com/ai-sidekick/docs/assets/14931371/40402d0d-4f62-4067-ad5c-85c31cc5e07e"/>
-<img width="400" src="https://github.com/ai-sidekick/docs/assets/14931371/16804cff-6d0d-4cb0-9615-e1a133ea87c5"/>
+<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/40402d0d-4f62-4067-ad5c-85c31cc5e07e"/>
+<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/16804cff-6d0d-4cb0-9615-e1a133ea87c5"/>
 </Accordion>
 
 ## Configuration
@@ -25,4 +25,4 @@ The Zendesk connector currently requires the end user to know the subdomain of t
 Instructions for generating Zendesk API keys can be found [here](https://support.zendesk.com/hc/en-us/articles/4408889192858-Generating-a-new-API-token).
 
 ## Synchronization
-All pages in the Zendesk help center chosen during the authorization step are synced to Sidekick on a daily basis. These documents can be fetched from the `/get-documents` endpoint as needed. Each call to this endpoint will fetch the most up to date documents from the Zendesk account associated with the provided `connection_id`. 
+All pages in the Zendesk help center chosen during the authorization step are synced to Psychic on a daily basis. These documents can be fetched from the `/get-documents` endpoint as needed. Each call to this endpoint will fetch the most up to date documents from the Zendesk account associated with the provided `connection_id`. 

@@ -1,15 +1,15 @@
 ---
-title: Sidekick Pull
+title: Psychic Pull
 description: "How to fetch Documents and Conversations for each of your connections"
 ---
 
-## Sidekick Pull
+## Psychic Pull
 You can use the `/get-documents` endpoint to pull all Document-type data from the connections your customers have established.
 
 
 ### 1. Get Secret API Key
-Get your secret key from the [Sidekick dashboard](https://dashboard.getsidekick.ai/api-keys). This is used to authenticate requests from your server.
-![](https://github.com/ai-sidekick/docs/assets/14931371/b8d5d552-f909-4fcc-8a8a-a2ef8b35a603)
+Get your secret key from the [Psychic dashboard](https://dashboard.psychic.dev/api-keys). This is used to authenticate requests from your server.
+![](https://github.com/psychicapi/docs/assets/14931371/b8d5d552-f909-4fcc-8a8a-a2ef8b35a603)
 
 
 ### 2. Make a request from a server
@@ -25,6 +25,6 @@ Make an http request to `https://sidekick-ezml2kwdva-uc.a.run.app/get_documents`
 You can also test out document fetching from our [API playground](https://sidekick-ezml2kwdva-uc.a.run.app/docs#/default/get_documents_get_documents_post).
 
 ## Future
-* Sidekick Push: define an endpoint to receive data, instead of having to poll for data.
+* Psychic Push: define an endpoint to receive data, instead of having to poll for data.
 * Webhooks: get pushed data only when changes are detected.
 * Incremental syncs: receive only incremental changes to your customers resources, instead of all resources every time.
