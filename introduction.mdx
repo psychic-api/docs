@@ -3,13 +3,16 @@ title: Introduction
 description: "Sidekick is the universal API for unstructured data"
 ---
 
-## What is Psychic
-[Psychic](https://psychic.dev/) is a tool to connect to your customer's SaaS applications like Notion, Zendesk, Confluence, and Google Drive  
-You can think of it like Plaid for unstructured text documents. Psychic is easy to set up - you use it by importing the NPM package and configuring it with your Psychic API key, which you can get from the [Psychic dashboard](http://dashboard.psychic.dev/). When your users connect their applications, you can view these connections from the dashboard.
+## 🔮 What is Psychic
+[Psychic](https://psychic.dev/) is an open source integration platform to sync and transform unstructured data from SaaS applications like Notion, Slack, Zendesk, Confluence, and Google Drive.
 
-Use cases:
-* **For AI startups:** Ingest your users' documents into a vector database and use load document chunks into in your prompts.
-* **For B2B companies:** Accelerate customer onboarding by letting your customers share documents with you with just a few clicks.
+**Psychic is designed for startups that use LLMs in their product.** Instead of building one integration for each data sources, you can build one integration that works for all data sources.
+
+There are 4 parts of the platform
+* 🪄 **Psychic Link:** A modal that lets end users to connect their data sources with a point and click interface, using OAuth when available. Available as an NPM package for React projects, or as a magic link.
+* 🪢 **Psychic Connectors:** Server-side code that makes API calls and handles token management. New integrations are added by implementing a new `DataConnector` in the server-side code.
+* 💃 **Psychic Models:** Universal data models that make it possible to transform unstructured data from disparate data sources into a consistent schema before you receive it. Currently `Document` and `Conversation` models are supported.
+* 🎩 **Psychic Dashboard:** A front-end for the Psychic platform that makes it easy to manage connections and connect data sources without having to add Link to an existing app.
 
 <Note>Psychic used to be called Sidekick, so if you see any reference to Sidekick in the Docs or libraries, just know it's the same product!</Note>
 
@@ -17,9 +20,19 @@ Use cases:
 Here's how Psychic looks to users when they connect their applications.
 <iframe width="100%" height="500" src="https://github.com/psychicapi/docs/assets/14931371/22c7dd7f-efe0-4b0a-9a64-e8e1b171b1c9" />
 
+## 🔌 Integrations
+Psychic integrates with [LangChain](https://python.langchain.com/en/latest/index.html) and your favorite vector database.
+
+Psychic currently supports the following connectors:
+* Notion
+* Confluence
+* Zendesk Help Center
+* Google Drive (PDFs and documents)
+* Slack
+
+If you don't see one you want, feel free to [put up a PR](https://github.com/psychic-api/psychic) and add it!
+
 ## 🚧 Roadmap
-* Universal API: Data models for Documents and Conversations
-* Slack Connector
 * LangChain DataLoader
 * Webhook support to notify when source documents/conversations have been updated
-* Universal API: support for write scopes for each connector
+* Support for write scopes for each connector, in addition to read scopes

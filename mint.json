@@ -23,9 +23,9 @@
   },
   "anchors": [
     {
-      "name": "Connectors",
-      "icon": "plug",
-      "url": "connectors"
+      "name": "Dashboard",
+      "icon": "table-columns",
+      "url": "https://dashboard.psychic.dev"
     },
     {
       "name": "API Reference",
@@ -35,16 +35,21 @@
     {
       "name": "Community",
       "icon": "slack",
-      "url": "https://join.slack.com/t/sidekick-public/shared_invite/zt-1ty1wz6w0-8jkmdvBpM5kj_Fh30EiCcg"
+      "url": "https://join.slack.com/t/psychicapi/shared_invite/zt-1ty1wz6w0-8jkmdvBpM5kj_Fh30EiCcg"
     }
   ],
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["introduction", "quickstart", "psychic-dashboard", "psychic-link", "contributing"]
+      "pages": ["introduction", "quickstart", 
+      {
+        "group": "SDKs",
+        "pages": ["psychic-link", "python-sdk"]
+      },
+      "psychic-dashboard", "langchain", "contributing"]
     },
     {
-      "group": "Psychic Connectors",
+      "group": "Connectors",
       "pages": ["connectors/confluence", "connectors/gdrive", "connectors/notion", "connectors/slack", "connectors/zendesk"]
     }
   ],

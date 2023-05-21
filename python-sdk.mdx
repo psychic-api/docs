@@ -1,0 +1,35 @@
+---
+title: Python SDK
+description: "How to query data in python"
+---
+
+Psychic has a [python package](https://pypi.org/project/psychicapi/) that makes it easy to query documents from established connections.
+
+## Installation
+The python SDK can be installed by running
+
+```bash
+pip install psychicapi
+```
+
+## Usage 
+
+### Initialization
+
+```
+from psychicapi import ConnectorId, Psychic 
+psychic = Psychic(secret_key="secret-key")
+```
+
+### Get active connections
+
+```
+# Get all active connections and optionally filter by connector id and/or connection id
+connections = psychic.get_connections(connector_id=ConnectorId.notion, connection_id=None)
+```
+
+### Retrieve documents from a connection
+
+```
+docs = psychic.get_documents(ConnectorId.zendesk, "connection-id")
+```
