@@ -1,0 +1,246 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Psychic API
+  description: The API reference for Psychic's hosted service
+servers:
+- url: https://api.psychic.dev
+#----------------PATHS---------------
+paths:
+  /get-accounts:
+    post:
+      description: Fetches accounts and their associated metadata and credentials
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: object
+                  properties:
+                    connector_id:
+                      type: string
+                    account_id:
+                      type: string
+      responses:
+        '200':
+          description: Successfully retrieved a list of accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Account"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+  /get-connector-status:
+    post:
+      description: Returns whether a connector is enabled and all accounts connected to it
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - connector_id
+              properties:
+                connector_id:
+                  type: string
+      responses:
+        '200':
+          description: Successfully retrieved a connector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      is_enabled: 
+                        type: boolean
+                      accounts: 
+                        $ref: "#/components/schemas/Account"          
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+  /get-documents:
+    post:
+      description: Returns all Documents for a given account and connector
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - connector_id
+                - account_id
+              properties:
+                connector_id:
+                  type: string
+                account_id:
+                  type: string
+      responses:
+        '200':
+          description: Successfully retrieved documents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Document"      
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+  /get-conversations:
+    post:
+      description: Returns all Conversations for a given account and connector
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - connector_id
+                - account_id
+              properties:
+                connector_id:
+                  type: string
+                account_id:
+                  type: string
+                oldest_timestamp:
+                  type: integer
+      responses:
+        '200':
+          description: Successfully retrieved Conversations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Conversation"      
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+#----------------COMPONENTS---------------
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Account:
+      type: object
+      required:
+        - account_id
+        - connector_id
+        - config
+      properties:
+        account_id:
+          type: string
+        connector_id:
+          type: string
+        metadata:
+          type: object
+        config:
+          type: object
+          properties:
+            public_key:
+              type: string
+            user_id:
+              type: string
+    Document:
+      type: object
+      required:
+        - title
+        - content
+        - uri
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        uri:
+          type: object
+    Conversation:
+      type: object
+      required:
+        - messages
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/Message"
+        channel:
+          type: object
+          properties:
+            name:
+              type: string
+            id:
+              type: string
+    Message:
+      type: object
+      required:
+        - id
+        - sender
+        - content
+      properties:
+        id:
+          type: string
+        sender:
+          $ref: "#/components/schemas/MessageSender"
+        content:
+          type: string
+        timestamp:
+          type: integer
+        replies:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              sender:
+                $ref: "#/components/schemas/MessageSender"
+              content:
+                type: string
+              timestamp:
+                type: integer
+              replies:
+                type: array
+                items:
+                  type: object
+        uri:
+          type: string
+    MessageSender:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    BadRequest:
+      type: object
+      properties:   
+        message:
+          type: string
+security:
+  - BearerAuth: []

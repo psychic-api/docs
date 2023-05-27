@@ -30,7 +30,7 @@
     {
       "name": "API Reference",
       "icon": "rectangle-terminal",
-      "url": "https://sidekick-server-ezml2kwdva-uc.a.run.app/docs"
+      "url": "api-reference"
     },
     {
       "name": "Community",
@@ -51,6 +51,14 @@
     {
       "group": "Connectors",
       "pages": ["connectors/confluence", "connectors/gdrive", "connectors/notion", "connectors/slack", "connectors/zendesk"]
+    },
+    {
+      "group": "API Reference",
+      "pages": ["api-reference/authentication", 
+      {
+        "group": "Endpoints",
+        "pages": ["api-reference/endpoint/get-accounts", "api-reference/endpoint/get-connector-status", "api-reference/endpoint/get-documents", "api-reference/endpoint/get-conversations"]
+      }]
     }
   ],
   "footerSocials": {
@@ -62,5 +70,6 @@
     "auth": {
         "method": "bearer"
     }
-  }
+  },
+  "openapi": "/openapi.yaml"
 }
