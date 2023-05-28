@@ -34,18 +34,18 @@ const { open, isReady, isLoading, error } = usePsychicLink(publicKey, psychicCal
 * `publicKey` should be your public API key from Psychic, which you can get from the [Psychic dashboard](https://dashboard.psychic.dev).
 * `psychicCallback` is a callback function that will be called once a connection is successfully established.
 
-### 5. Programatically set a Connection ID
-The connection ID should be unique for every user + connection pair. For example, a user with ID `1234` connecting to Notion should have a Connection ID that uniquely identifies the tuple (`1234`, `notion`). Beyond those constraints, a connectionID can be any alphanumeric string.
+### 5. Set an Account ID
+The Account ID should be unique for every user. We recommend mapping Account ID to the unique user ID from your application. Documents and Conversations in Psychic are queried through a combination of Account IDs and Connector IDs.
 
 ```javascript
-const connectionID = `user12345_notion`
+const accountId = `user12345`
 ```
 
 ### 6. Trigger the modal
-Call `open` (or whatever variable that you unpacked it into) with the Connection ID to open the Psychic Link modal as a new window and initiate the connection flow. You can decide when and how to trigger this flow from your application.
+Call `open` (or whatever variable that you unpacked it into) with the Account ID to open the Psychic Link modal as a new window and initiate the connection flow. You can decide when and how to trigger this flow from your application.
 ```javascript
 <button onClick={() => {
-    open(connectionId)
+    open(accountId)
   }} >
   Connect to Notion
 </button>
@@ -56,10 +56,10 @@ If the connection is successful, you can implement the handling logic from the c
 
 For example:
 ```javascript
-const psychicCallback = (newConnectionId: string) => {
-  setNewConnectionId(newConnectionId)
-  setSuccessMessage(`Successfully created connection ${newConnectionId}`)
-  fetchDocumentsFromServer(newConnectionId)
+const psychicCallback = (newConnection) => {
+  setNewConnection(newConnection)
+  setSuccessMessage(`Successfully created connection between account ${newConnection.accountId} and ${newConnection.connectorId}`)
+  fetchDocumentsFromServer(newConnection.accountId, newConnection.connectorId)
 }
 ```
 

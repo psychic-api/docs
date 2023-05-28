@@ -7,9 +7,9 @@ servers:
 - url: https://api.psychic.dev
 #----------------PATHS---------------
 paths:
-  /get-accounts:
+  /get-connections:
     post:
-      description: Fetches accounts and their associated metadata and credentials
+      description: Fetches all Connections and their associated metadata
       requestBody:
         required: false
         content:
@@ -26,19 +26,19 @@ paths:
                       type: string
       responses:
         '200':
-          description: Successfully retrieved a list of accounts
+          description: Successfully retrieved a list of connections
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Account"
+                  $ref: "#/components/schemas/Connection"
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Account"
+                $ref: "#/components/schemas/BadRequest"
   /get-connector-status:
     post:
       description: Returns whether a connector is enabled and all accounts connected to it
@@ -66,8 +66,10 @@ paths:
                     properties:
                       is_enabled: 
                         type: boolean
-                      accounts: 
-                        $ref: "#/components/schemas/Account"          
+                      connections: 
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Connection"          
         '400':
           description: Bad Request
           content:
@@ -147,12 +149,11 @@ components:
       type: http
       scheme: bearer
   schemas:
-    Account:
+    Connection:
       type: object
       required:
         - account_id
         - connector_id
-        - config
       properties:
         account_id:
           type: string
@@ -160,13 +161,6 @@ components:
           type: string
         metadata:
           type: object
-        config:
-          type: object
-          properties:
-            public_key:
-              type: string
-            user_id:
-              type: string
     Document:
       type: object
       required:

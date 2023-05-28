@@ -1,38 +1,101 @@
 ---
 title: Quickstart
-description: "Connect to Notion and get back documents in 10 minutes"
+description: "Ask questions about your Notion documents with GPT"
 ---
+ETA: ⏱️ 30 minutes
 
 ## ⚡️ Psychic Quickstart
-In this tutorial we will set up a Notion connector, try it out as an end user would experience it, and use it to fetch documents from a Notion workspace.
+In this tutorial we will set up a Notion connector and use the Psychic Python SDK to fetch documents from a Notion workspace. We will also use LangChain to set up a retrieval service that allows us ask questions about documents in our Notion workspace using the [OpenAI Completions API](https://platform.openai.com/docs/api-reference/completions).
+
+### Prerequisites
+* Know some python
+* An [OpenAI API key](https://platform.openai.com/account/api-keys)
 
 ### 1. Create an account at [dashboard.psychic.dev](https://dashboard.psychic.dev)
-Psychic's cloud version is free to use for up to 2 connections.
+Psychic's cloud version is free to use for up to 5 connections.
 
-### 2. Navigate to the [Playground](https://dashboard.psychic.dev/playground) page to test out the connector
-You can test out what your users will see from the Playground. The playground can also be used to connect to your own data using Psychic.
-<img width="400" src="https://github.com/psychic-api/docs/assets/14931371/2c635f3e-ef29-4126-9bb8-80fc202270d5"/>
+### 2. Navigate to the [Playground](https://dashboard.psychic.dev/playground) page to set up a new connection.
+<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/f45c2c83-f076-477c-9ad1-94c2c4dfd61a" /></Frame>
+The playground is used to connect to your own data, while [Link](/psychic-link) is the easiest way to connect to your users' data.
+Enter an `Account ID` that uniquely identifies the user you're connecting on behalf of. In production, the `Account ID` should be unique for every user, and each Connection is a unique tuple of (`Account ID`, `Connector ID`).
 
-Enter a Connection ID that uniquely identifies the Notion workspace you're trying to connect to. In production, the Connection ID should be unique for every (user, data source) tuple. For example, if one of your users with ID `1234` connects to Notion, you can use something like `1234+notion` to uniquely identify the connection
+Press `Connect` and follow the steps in the Psychic Link modal. Choose which pages from your Notion workspace you want to share.
 
-Press `Connect` and follow the steps in the Psychic Link modal. Choose which pages from your Notion workspace you want to ingest.
+Refresh the page and go to the `Active Connections` tab to see if the connection with the Account ID you set now appears in the table. 
+<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/51e52ec4-c3fe-4a2b-a8fb-a2d3d18d5c1b" /></Frame>
 
-### 3. Test that you've successfully connected to your Notion workspace
-<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/07770b1c-8b5f-4e53-a95d-69cadcfdfdbc"/>
+### 3. Test that the connection works
+Get your secret API key from the [Psychic dashboard](https://dashboard.psychic.dev/api-keys). 
+Then, visit the [API Docs](/api-reference/endpoint/get-documents) and paste your secret key into the `Bearer` field.
+<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/b68437d4-d7e3-4ef1-86ea-a19fe54204e5" /></Frame>
 
-Refresh the page and go to the `Active Connections` tab to see if the connection with the Connection ID you set now appears in the table. 
+Fill in the `connector_id` (`notion`) and the `account_id` you set when making the connection from the Playground.
+<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/841a4348-b7ef-45b8-884f-d1fa71f1b942" /></Frame>
 
-### 4. Fetch documents from the Notion workspace you just connected to
-First you will need to get your API key from the [Psychic dashboard](https://dashboard.psychic.dev/api-keys) and use that to authorize yourself when making requests to retrieve documents through one of your connections. The secret API key should only be used from your server-side code, while the public key can be used from anywhere.
-<img width="400" src="https://user-images.githubusercontent.com/14931371/236303471-d1948396-f185-4af5-b034-3b63ca4ea03e.png" />
+Click "Send Request". You should see your documents returned in the API response.
+<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/1a78f740-f8c8-4463-81a4-cd92c690e585" /></Frame>
 
-Then, visit the [API tesing page](https://sidekick-ezml2kwdva-uc.a.run.app/docs#/). Paste your API key into the `Bearer token` field in FastAPI
-<img width="400" src="https://user-images.githubusercontent.com/14931371/232177777-c73c3891-96bf-44fb-920e-f657102376b8.png" />
+This is the most powerful part of the Psychic platform - **you can use this single API to query documents from any number of connections** to Notion, Google Drive, Zendesk, Slack, and more.
+Use `connector_id` and `account_id` to filter the documents you want to return.
 
-Use the `/get-documents` endpoint to test that you can retrieve the Notion pages you shared with Psychic. You will need to provide the Connection ID you set in step 3, as well as `notion` as the Connector ID.
+<Note>Psychic will soon support metadata that will allow you to specify arbitrary properties to filter on beyond just Connector and Account</Note>
 
 ## Conclusion
 That's it! You've tested what it will be like for your users to connect their Notion pages with Psychic and for you to query them once connected.
+
+## Bonus: Set up ChatGPT for your Notion workspace
+
+It's surprisingly easy to go from a Psychic Connection to using GPT to ask questions over your Notion workspace.
+Here's a script that does exactly that in about 30 lines of code.
+
+### Prerequisites
+Run the following to install the relevant python packages
+```bash
+pip install psychicapi langchain openai
+```
+### ChatGPT for your Notion
+Save the following to a new file called `psychic_demo.py`
+```python
+import sys
+
+from psychicapi import Psychic, ConnectorId
+from langchain.docstore.document import Document
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores import Chroma
+from langchain.llms import OpenAI
+from langchain.chains import RetrievalQAWithSourcesChain
+
+# Create a document loader for Notion. We can also load from other connectors e.g. ConnectorId.gdrive
+psychic = Psychic(secret_key="PSYCHIC_SECRET_KEY") # Replace this with your secret API key
+
+raw_docs = psychic.get_documents(ConnectorId.notion, "account_id") #replace this with the account_id you set when creating this connection
+
+if raw_docs is None:
+    texts = [
+		Document(page_content="", metadata={"title": "", "source": ""})
+	]
+else:
+	documents = [
+		Document(page_content=doc["content"], metadata={"title": doc["title"], "source": doc["uri"]},)
+		for doc in raw_docs
+	]
+
+	text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+	texts = text_splitter.split_documents(documents)
+embeddings = OpenAIEmbeddings(openai_api_key="OPENAI_API_KEY") # Replace this with your OpenAI API Key
+vdb = Chroma.from_documents(texts, embeddings)
+query = sys.argv[1]
+chain = RetrievalQAWithSourcesChain.from_chain_type(OpenAI(temperature=0), chain_type="stuff", retriever=vdb.as_retriever())
+answer = chain({"question": query}, return_only_outputs=True)
+print(answer)
+```
+In your teminal, run the following command, replacing it with the question you want to ask.
+
+```bash
+python psychic_demo.py "some_question"
+```
+It takes awhile because we're using LangChain to set up a local vector database, but you should get your answer within 30 seconds.
 
 ### Next Steps
 1. Install the [Psychic Python SDK](/python-sdk) to query your documents in python, instead of making API calls.

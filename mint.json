@@ -28,7 +28,7 @@
       "url": "https://dashboard.psychic.dev"
     },
     {
-      "name": "API Reference",
+      "name": "Universal API",
       "icon": "rectangle-terminal",
       "url": "api-reference"
     },
@@ -46,7 +46,7 @@
         "group": "SDKs",
         "pages": ["psychic-link", "python-sdk"]
       },
-      "psychic-dashboard", "langchain", "contributing"]
+      "psychic-dashboard", "querying", "langchain", "contributing"]
     },
     {
       "group": "Connectors",
@@ -57,7 +57,7 @@
       "pages": ["api-reference/authentication", 
       {
         "group": "Endpoints",
-        "pages": ["api-reference/endpoint/get-accounts", "api-reference/endpoint/get-connector-status", "api-reference/endpoint/get-documents", "api-reference/endpoint/get-conversations"]
+        "pages": ["api-reference/endpoint/get-documents", "api-reference/endpoint/get-conversations", "api-reference/endpoint/get-connections", "api-reference/endpoint/get-connector-status"]
       }]
     }
   ],
