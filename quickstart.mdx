@@ -45,7 +45,7 @@ That's it! You've tested what it will be like for your users to connect their No
 
 ## Bonus: Set up ChatGPT for your Notion workspace
 
-It's surprisingly easy to go from a Psychic Connection to using GPT to ask questions over your Notion workspace.
+It's easy to go from a Psychic Connection to using GPT to ask questions over your Notion workspace.
 Here's a script that does exactly that in about 30 lines of code.
 
 ### Prerequisites
@@ -72,9 +72,7 @@ psychic = Psychic(secret_key="PSYCHIC_SECRET_KEY") # Replace this with your secr
 raw_docs = psychic.get_documents(ConnectorId.notion, "account_id") #replace this with the account_id you set when creating this connection
 
 if raw_docs is None:
-    texts = [
-		Document(page_content="", metadata={"title": "", "source": ""})
-	]
+    answer = "No documents were found"
 else:
 	documents = [
 		Document(page_content=doc["content"], metadata={"title": doc["title"], "source": doc["uri"]},)
@@ -83,17 +81,18 @@ else:
 
 	text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
 	texts = text_splitter.split_documents(documents)
-embeddings = OpenAIEmbeddings(openai_api_key="OPENAI_API_KEY") # Replace this with your OpenAI API Key
-vdb = Chroma.from_documents(texts, embeddings)
-query = sys.argv[1]
-chain = RetrievalQAWithSourcesChain.from_chain_type(OpenAI(temperature=0), chain_type="stuff", retriever=vdb.as_retriever())
-answer = chain({"question": query}, return_only_outputs=True)
+    embeddings = OpenAIEmbeddings(openai_api_key="OPENAI_API_KEY") # Replace this with your OpenAI API Key
+    vdb = Chroma.from_documents(texts, embeddings)
+    query = sys.argv[1]
+    chain = RetrievalQAWithSourcesChain.from_chain_type(OpenAI(temperature=0), chain_type="stuff", retriever=vdb.as_retriever())
+    answer = chain({"question": query}, return_only_outputs=True)
 print(answer)
+
 ```
 In your teminal, run the following command, replacing it with the question you want to ask.
 
 ```bash
-python psychic_demo.py "some_question"
+python psychic_demo.py "your_question"
 ```
 It takes awhile because we're using LangChain to set up a local vector database, but you should get your answer within 30 seconds.
 
