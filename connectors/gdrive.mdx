@@ -25,4 +25,5 @@ They will need to click on "Advanced" in the warning page to bypass it.</Note>
 There are no configuration options for Google Drive at the moment.
 
 ## Synchronization
-Documents are synced from Google Drive to Psychic on a daily basis. These documents can be fetched from the `/get-documents` endpoint on an as-needed basis. Each call to this endpoint will fetch the most up to date documents from the Google Drive folder associated with the provided `account_id`. 
+By default, Documents can be fetched from the `/get-documents` endpoint on an as-needed basis. 
+It's also possible to set up 24 hour syncs by providing a webhook URL in the [dashboard](https://dashboard.psychic.dev/syncs)

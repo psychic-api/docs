@@ -1,7 +1,18 @@
 ---
 title: Slack
-description: "Psychic will support Slack in a future release"
+description: "Psychic supports ingesting Conversations from a Slack channel"
 ---
 The `connector_id` for Slack is `slack`.
 
-## 🚧
+## Authorization Type
+Psychic uses [OAuth 2.0](https://api.slack.com/legacy/oauth) to connect to Slack workspaces.
+
+## Authorization Flow
+End users will need to add the Psychic Slack app to the workspace they want to sync.
+
+## Configuration
+The Slack Connector will only retrieve messages from channels where the Psychic Slack App has been added to.
+
+## Synchronization
+By default, Conversations can be fetched from the `/get-documents` endpoint on an as-needed basis. 
+It's also possible to set up 24 hour syncs by providing a webhook URL in the [dashboard](https://dashboard.psychic.dev/syncs)

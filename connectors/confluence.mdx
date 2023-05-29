@@ -19,4 +19,5 @@ By default, Psychic will use our Confluence OAuth credentials to connect to your
 
 
 ## Synchronization
-All pages in the Confluence space chosen during the authorization step are synced to Psychic on a daily basis. These documents can be fetched from the `/get-documents` endpoint as needed. Each call to this endpoint will fetch the most up to date documents from the Confluence space associated with the provided `account_id`. 
+By default, Documents can be fetched from the `/get-documents` endpoint on an as-needed basis. 
+It's also possible to set up 24 hour syncs by providing a webhook URL in the [dashboard](https://dashboard.psychic.dev/syncs)
