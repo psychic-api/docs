@@ -46,7 +46,7 @@
         "group": "SDKs",
         "pages": ["psychic-link", "python-sdk"]
       },
-      "psychic-dashboard", "querying", "langchain", "contributing"]
+      "psychic-dashboard", "querying", "langchain", "llama-index", "contributing"]
     },
     {
       "group": "Connectors",

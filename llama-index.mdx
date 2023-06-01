@@ -1,0 +1,28 @@
+---
+title: Using Psychic with LlamaIndex
+description: "Psychic can be used to connect live data to LlamaIndex"
+---
+
+## 🦙 Using Psychic as a LlamaIndex Data Loader
+Psychic has a native integration with LlamaIndex which makes it easy to use Psychic to connect to live customer data, and load Documents into LlamaIndex for downstream processing.
+[This notebook](https://gpt-index.readthedocs.io/en/latest/examples/data_connectors/PsychicDemo.html) shows how to use Psychic as a LlamaIndex Data Loader.
+
+An example using `GPTListIndex`:
+
+```python
+from llama_index import GPTListIndex, PsychicReader
+from IPython.display import Markdown, display
+
+# Get Psychic API key from https://dashboard.psychic.dev/api-keys
+psychic_key = "PSYCHIC_API_KEY"
+# Connector ID and Account ID are typically set programatically based on the application state.
+account_id = "ACCOUNT_ID" 
+connector_id = "notion"
+documents = PsychicReader(psychic_key=psychic_key).load_data(connector_id=connector_id, account_id=account_id)
+
+os.environ['OPENAI_API_KEY'] = "OPENAI_API_KEY"
+index = GPTListIndex.from_documents(documents)
+query_engine = index.as_query_engine()
+response = query_engine.query("What is Psychic's privacy policy?")
+display(Markdown(f"<b>{response}</b>"))
+```
