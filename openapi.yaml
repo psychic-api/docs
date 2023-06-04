@@ -154,7 +154,6 @@ paths:
               type: object
               required:
                 - question
-                - connector_ids
                 - account_id
                 - openai_api_key
               properties:
