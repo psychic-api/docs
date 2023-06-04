@@ -52,7 +52,7 @@
       "pages": ["api-reference/authentication", 
       {
         "group": "Endpoints",
-        "pages": ["api-reference/endpoint/get-documents", "api-reference/endpoint/get-conversations", "api-reference/endpoint/get-connections", "api-reference/endpoint/get-connector-status"]
+        "pages": ["api-reference/endpoint/get-documents", "api-reference/endpoint/get-conversations", "api-reference/endpoint/get-connections", "api-reference/endpoint/get-connector-status", "api-reference/endpoint/ask-question"]
       }]
     }
   ],
