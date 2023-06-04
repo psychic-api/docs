@@ -165,6 +165,9 @@ paths:
                   items:
                     type: string
                   description: A list of `connector_id`s to use as context. If empty, will attempt to use Documents from all data sources with at least one Connection.
+                openai_api_key:
+                  type: string
+                  description: An OpenAI API key. used to generate embeddings and request completions from OpenAI's API.
                 account_id:
                   type: string
                   description: The Account to search through. The `ask-question` endpoint can use only Documents belonging to the same Account as context.
