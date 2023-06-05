@@ -4,25 +4,21 @@ description: "Psychic supports ingesting articles from Zendesk Help Center."
 ---
 The `connector_id` for Zendesk is `zendesk`.
 
-<Tip>**Upcoming:** Psychic will also support ingesting data from Zendesk's Ticketing and CRM products. </Tip>
+Psychic supports ingesting tickets from Zendesk's [Ticketing APIs](https://developer.zendesk.com/api-reference/ticketing/introduction/) and articles from [Help Center APIs](https://developer.zendesk.com/api-reference/help_center/help-center-api/introduction/)
 
 ## Authorization Type
-Psychic uses [API Keys](https://support.zendesk.com/hc/en-us/articles/4408889192858-Generating-a-new-API-token) to connect to Zendesk. 
-
-<Tip>We are currently awaiting Zendesk approval for the Psychic OAuth application, after which we will use OAuth 2.0 to connect to Zendesk accounts.. </Tip>
+Psychic uses [OAuth 2.0](https://developer.zendesk.com/documentation/ticketing/working-with-oauth/creating-and-using-oauth-tokens-with-the-api/) to connect to Zendesk. 
 
 ## Authorization Flow
 <Accordion title="Show screenshots">
-<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/40402d0d-4f62-4067-ad5c-85c31cc5e07e"/>
-<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/16804cff-6d0d-4cb0-9615-e1a133ea87c5"/>
+<img width="400" src="https://github.com/psychic-api/docs/assets/14931371/121d57cc-abfe-427d-ae4a-6a180384563e"/>
+<img width="400" src="https://github.com/psychic-api/docs/assets/14931371/a2a2060e-3b9f-4375-ad2c-1b36b5d77aea"/>
 </Accordion>
 
 ## Configuration
 
 ### Custom OAuth Credentials
-The Zendesk connector currently requires the end user to know the subdomain of the Zendesk account they want to connect to. They must also have the capability to generate API keys in that account.
-
-Instructions for generating Zendesk API keys can be found [here](https://support.zendesk.com/hc/en-us/articles/4408889192858-Generating-a-new-API-token).
+The Zendesk connector requires the end user to know the subdomain of the Zendesk account they want to connect to.
 
 ## Synchronization
 Zendesk Documents can be fetched as-neded from the `/get-documents` endpoint. 
