@@ -86,13 +86,23 @@ paths:
             schema:
               type: object
               required:
-                - connector_id
                 - account_id
               properties:
-                connector_id:
-                  type: string
                 account_id:
                   type: string
+                  description: The Account ID to get documents for.
+                connector_id:
+                  type: string
+                  description: The Connector ID to get documents from. If not provided, will attempt to fetch documents from all Connectors with at least one connection.
+                pre_chunked:
+                  type: string
+                  description: Whether Documents should be returned as chunks. Chunks are fragments of a Document that's split semantically to keep similar content together. This is useful for ensuring content can fit inside the limited context window of a LLM.
+                min_chunk_size:
+                  type: integer
+                  description: The minimum size of a chunk in characters. If not proivded, will default to 500 characters.
+                max_chunk_size:
+                  type: integer
+                  description: The maxium size of a chunk in characters. If not proivded, will default to 1500 characters.
       responses:
         '200':
           description: Successfully retrieved documents
@@ -212,10 +222,13 @@ components:
       properties:
         title:
           type: string
+          description: The title of the source document.
         content:
           type: string
+          description: The text content of the document, provided as HTML. If pre_chunked is true, will return fragments of the source document.
         uri:
           type: object
+          description: A unique URL or ID that identifies the source document.
     Conversation:
       type: object
       required:
