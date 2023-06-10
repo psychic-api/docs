@@ -95,7 +95,7 @@ paths:
                   type: string
                   description: The Connector ID to get documents from. If not provided, will attempt to fetch documents from all Connectors with at least one connection.
                 pre_chunked:
-                  type: string
+                  type: boolean
                   description: Whether Documents should be returned as chunks. Chunks are fragments of a Document that's split semantically to keep similar content together. This is useful for ensuring content can fit inside the limited context window of a LLM.
                 min_chunk_size:
                   type: integer
