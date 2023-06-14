@@ -16,9 +16,13 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - filter
               properties:
                 filter:
                   type: object
+                  required:
+                    - account_id
                   properties:
                     connector_id:
                       type: string
