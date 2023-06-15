@@ -1,104 +1,143 @@
 ---
 title: Quickstart
-description: "Ask questions about your Notion documents with GPT"
+description: "Connect to your user's accounts with LangChain"
 ---
 ETA: ⏱️ 30 minutes
 
-## ⚡️ Psychic Quickstart
-In this tutorial we will set up a Notion connector and use the Psychic Python SDK to fetch documents from a Notion workspace. We will also use LangChain to set up a retrieval service that allows us ask questions about documents in our Notion workspace using the [OpenAI Completions API](https://platform.openai.com/docs/api-reference/completions).
+# ⚡️ Psychic Quickstart
+In this tutorial we will set up a connection with an API of your choice, use the Psychic Python SDK to fetch documents from that API, and use LangChain/Chroma/OpenAi to set up a retrieval service to ask questions about those documents. 
 
-### Prerequisites
-* Know some python
+We will also integrate Psychic into your application to connect to data from your user's accounts on Notion, Google Drive, or any other connector Psychic supports.
+The code for this tutorial is [here](https://github.com/psychic-api/psychic-quickstart).
+
+## Prerequisites
+* Familiarity with python
 * An [OpenAI API key](https://platform.openai.com/account/api-keys)
 
-### 1. Create an account at [dashboard.psychic.dev](https://dashboard.psychic.dev)
-Psychic's cloud version is free to use for up to 5 connections.
+## Create a connection
+1. Create an account at [dashboard.psychic.dev](https://dashboard.psychic.dev)
+2. Navigate to the [Create Connection](https://dashboard.psychic.dev/create-connection) page to set up a new connection. Pick any arbitrary string as the `account_id`, but be sure to remember this value.
+3. Press `Connect` and follow the steps in the Psychic Link modal to establish a new connection. You'll see a confirmation message if the connection is successful.
 
-### 2. Navigate to the [Playground](https://dashboard.psychic.dev/playground) page to set up a new connection.
-<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/f45c2c83-f076-477c-9ad1-94c2c4dfd61a" /></Frame>
-The playground is used to connect to your own data, while [Link](/psychic-link) is the easiest way to connect to your users' data.
-Enter an `Account ID` that uniquely identifies the user you're connecting on behalf of. In production, the `Account ID` should be unique for every user, and each Connection is a unique tuple of (`Account ID`, `Connector ID`).
-
-Press `Connect` and follow the steps in the Psychic Link modal. Choose which pages from your Notion workspace you want to share.
-
-Refresh the page and go to the `Active Connections` tab to see if the connection with the Account ID you set now appears in the table. 
-<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/51e52ec4-c3fe-4a2b-a8fb-a2d3d18d5c1b" /></Frame>
-
-### 3. Test that the connection works
+## Fetch documents from your connection
 Get your secret API key from the [Psychic dashboard](https://dashboard.psychic.dev/api-keys). 
-Then, visit the [API Docs](/api-reference/endpoint/get-documents) and paste your secret key into the `Bearer` field.
-<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/b68437d4-d7e3-4ef1-86ea-a19fe54204e5" /></Frame>
+Then, send a request to `https://api.psychic.dev/get-documents` to fetch documents from the account you just connected. If you connected to a Conversations connector (e.g. Slack), use the `/get-conversations' [endpoint](/api-reference/endpoint/get-conversations) instead.
 
-Fill in the `connector_id` (`notion`) and the `account_id` you set when making the connection from the Playground.
-<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/841a4348-b7ef-45b8-884f-d1fa71f1b942" /></Frame>
-
-Click "Send Request". You should see your documents returned in the API response.
-<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/1a78f740-f8c8-4463-81a4-cd92c690e585" /></Frame>
-
-This is the most powerful part of the Psychic platform - **you can use this single API to query documents from any number of connections** to Notion, Google Drive, Zendesk, Slack, and more.
-Use `connector_id` and `account_id` to filter the documents you want to return.
-
-<Note>Psychic will soon support metadata that will allow you to specify arbitrary properties to filter on beyond just Connector and Account</Note>
-
-## Conclusion
-That's it! You've tested what it will be like for your users to connect their Notion pages with Psychic and for you to query them once connected.
-
-## Bonus: Set up ChatGPT for your Notion workspace
-
-It's easy to go from a Psychic Connection to using GPT to ask questions over your Notion workspace.
-Here's a script that does exactly that in about 30 lines of code.
-
-### Prerequisites
-Run the following to install the relevant python packages
-```bash
-pip install psychicapi langchain openai
 ```
-### ChatGPT for your Notion
-Save the following to a new file called `psychic_demo.py`
-```python
-import sys
+curl --request POST \
+  --url https://api.psychic.dev/get-documents \
+  --header 'Authorization: Bearer {your_secret_key}' \
+  --data '{
+  "account_id": "{account_id}"
+}'
+```
 
+<Tip>You can use this API to query documents from any data source and get back results as a consistent HTML document. This means you only need to write a single HTML parser, instead of writing customer parsers for each data source.</Tip>
+
+You can also visit the [API Docs](/api-reference/endpoint/get-documents) to test the Psychic APIs from an interactive playground.
+<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/38bebe75-bd71-4d61-a71a-c7bb8c80306e" /></Frame>
+
+If you see the documents you shared in the results, it means that you've successfully established an OAuth connection with Psychic, fetched data from your connected account, and normalized that data has HTML to easily parse and use with LangChain.
+
+<Tip>You can also set `chunked=true` in your request to get back documents that are split into segments between `min_chunk_size` and `max_chunk_size`. Psychic employs a chunking strategies that attempts to keep relevant sections together.</Tip>
+
+## Ask questions about your documents
+Clone the [quickstart repo](https://github.com/psychic-api/psychic-quickstart) and following the instructions to run it.
+Be sure to substitute your own OpenAI API key and Psychic secret key, as well as the `account_id` you used to create a connection.
+<Frame><img src="https://github.com/psychic-api/docs/assets/14931371/3870e96d-bd40-42fa-9513-140336011b49"/></Frame>
+The code:
+```python
+import os
+from dotenv import load_dotenv
+load_dotenv()
 from psychicapi import Psychic, ConnectorId
-from langchain.docstore.document import Document
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.schema import Document
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.llms import OpenAI
 from langchain.chains import RetrievalQAWithSourcesChain
 
-# Create a document loader for Notion. We can also load from other connectors e.g. ConnectorId.gdrive
-psychic = Psychic(secret_key="PSYCHIC_SECRET_KEY") # Replace this with your secret API key
+try:
+    psychic = Psychic(secret_key=os.getenv("PSYCHIC_SECRET_KEY"))
+    #replace account_id with the ones you used when creating a new connection at https://dashboard.psychic.dev/playground
+    psychic_docs = psychic.get_documents(account_id="account_id", chunked=True)
+    docs = [
+        Document(page_content=doc["content"], metadata={"title": doc["title"], "source": doc["uri"]})
+        for doc in psychic_docs
+    ]
 
-raw_docs = psychic.get_documents(ConnectorId.notion, "account_id") #replace this with the account_id you set when creating this connection
-
-if raw_docs is None:
-    answer = "No documents were found"
-else:
-	documents = [
-		Document(page_content=doc["content"], metadata={"title": doc["title"], "source": doc["uri"]},)
-		for doc in raw_docs
-	]
-
-	text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
-	texts = text_splitter.split_documents(documents)
-    embeddings = OpenAIEmbeddings(openai_api_key="OPENAI_API_KEY") # Replace this with your OpenAI API Key
-    vdb = Chroma.from_documents(texts, embeddings)
-    query = sys.argv[1]
-    chain = RetrievalQAWithSourcesChain.from_chain_type(OpenAI(temperature=0), chain_type="stuff", retriever=vdb.as_retriever())
-    answer = chain({"question": query}, return_only_outputs=True)
-print(answer)
-
+    embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY"))
+    vdb = Chroma.from_documents(docs, embeddings)
+    while True:
+        question = input("✨ Ask a question: ")
+        chain = RetrievalQAWithSourcesChain.from_chain_type(OpenAI(temperature=0), chain_type="stuff", retriever=vdb.as_retriever())
+        answer = chain({"question": question}, return_only_outputs=True)
+        print(answer)
+        print("")
+except Exception as e:
+    print(e)
 ```
-In your teminal, run the following command, replacing it with the question you want to ask.
 
-```bash
-python psychic_demo.py "your_question"
+## Add the Link component to your application
+In order for your users to connect their own documents, you will need to trigger the modal you used for OAuth in step 1 from your application.
+There are two ways to do this:
+
+### As a React hook
+```javascript
+import React, { useState } from 'react';
+import { usePsychicLink } from '@psychic-api/link';
+
+const PsychicDemo: React.FC = () => {
+  const [connection, setConnection] = useState(null)
+  const { open, isReady, isLoading, error } = usePsychicLink(publicKey, psychicCallback) // publicKey is your Psychic public key
+  const accountId = getUserId()
+  
+  const psychicCallback = (newConnection) => {
+    setConnection(newConnection)
+    fetchDocumentsFromServer(newConnection.accountId, newConnection.connectorId) // Optional. Send a request to your backend to fetch documents using the Psychic API endpoints or Python library.
+  }
+  return (
+    <button onClick={() => {
+      open(accountId)
+    }} >
+      Connect
+    </button>
+  )
+}
 ```
-It takes awhile because we're using LangChain to set up a local vector database, but you should get your answer within 30 seconds.
+For  more details refer to the [Link docs](/psychic-link).
 
-### Next Steps
-1. Install the [Psychic Python SDK](/python-sdk) to query your documents in python, instead of making API calls.
-2. Install the [Psychic React SDK](/psychic-link) to load the Link component into your own project.
-3. Check out the [LangChain tutorial](https://github.com/psychic-api/psychic-langchain-tutorial) to use Psychic to load documents into your LangChain application.
+### As a magic link
+You can send a shareable link to your users that allows them to create new connections. This is helpful if you aren't sure who in your customer's organization has the right permissions.
 
+The url takes this format: `https://link.psychic.dev/?public_key={public_key}&account_id={account_id}`.
+* `public_key` is the Public Key you can copy from https://dashboard.psychic.dev/api-keys
+* `account_id` is a unique ID to identify each group of connections. Typically this is the unique user id you use in your application. This should NOT be a secret or contain PII (e.g. an email).
 
+## Set up syncs
+You can fetch these documents when needed from your application by making requests to the `/get-documents` or `/get-conversations` endpoint, depending on the data source.
+The Psychic [python SDK](/psychic-sdk) provides a convenient wrapper around thse API calls.
+
+It's also possible to set up a webhook from the [Syncs page](https://dashboard.psychic.dev/syncs) to receive all documents from every connector on a 24 hour schedule. Requests to the webhook will include a body with the following schema:
+```json
+{
+  'account_id': string,
+  'connector_id': string,
+  'documents': [{
+    'title': string
+    'content': string
+    'connector_id': string
+    'account_id': string
+    'uri' string (optional)
+  }]
+}
+```
+
+## Next Steps
+Now you know how to:
+1. Establish new connections with your users' accounts
+2. Fetch data from those accounts and convert it to HTML documents
+3. Connect documents to a LangChain application
+4. Poll Psychic's API to get documents when needed or set up webhooks to fetch documents automatically
+
+You have everything you need to integrate your user's siloed data with your LangChain application.

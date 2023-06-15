@@ -1,12 +1,12 @@
 ---
 title: Introduction
-description: "Psychic is the universal API for unstructured data"
+description: "Psychic is the data integration platform for LLMs"
 ---
 
 ## 🔮 What is Psychic
-[Psychic](https://psychic.dev/) is an open source integration platform to extract and transform unstructured data from SaaS applications like Notion, Slack, Zendesk, Confluence, and Google Drive.
-
-**Psychic is designed for startups that use LLMs and need to retrieve documents to use as context.** Instead of building one integration for each data sources, you can build one integration that works for all data sources.
+[Psychic](https://psychic.dev/) is an open source data integration platform for large language models (LLMs). 
+Psychic includes full OAuth flows for 10+ data sources, transforms data from each source into vector store optimized Documents, and handles data syncs automatically.
+Psychic is designed to work with applications that use [LangChain](https://python.langchain.com/en/latest/index.html), but can integrate with most other tech stacks.
 
 There are 3 parts of the platform
 * 🪄 **Psychic Link:** A modal that lets end users to connect their data sources with a point and click interface, using OAuth. Available as an NPM package for React projects, or as a magic link.
@@ -20,7 +20,7 @@ Here's how Psychic looks to users when they connect their applications.
 <iframe width="100%" height="500" src="https://github.com/psychicapi/docs/assets/14931371/22c7dd7f-efe0-4b0a-9a64-e8e1b171b1c9" />
 
 ## 🔌 Integrations
-Psychic integrates with [LangChain](https://python.langchain.com/en/latest/index.html) and your favorite vector database.
+Psychic integrates with both LangChain and LlamaIndex.
 
 Psychic currently supports the following connectors:
 * Notion
@@ -28,11 +28,17 @@ Psychic currently supports the following connectors:
 * Zendesk Help Center
 * Google Drive (PDFs and documents)
 * Slack
+* Web scraping (alpha)
+* Dropbox (alpha)
+* Intercom (alpha)
+* Hubspot (alpha)
+* Salesforce (alpha)
+* Readme.io (alpha)
 
-If you don't see one you want, feel free to [put up a PR](https://github.com/psychic-api/psychic) and add it!
+If you don't see one you want, feel free to request one in our [Slack](https://join.slack.com/t/psychicapi/shared_invite/zt-1ty1wz6w0-8jkmdvBpM5kj_Fh30EiCcg) or [put up a PR](https://github.com/psychic-api/psychic) to add it yourself.
 
 ## 🚧 Roadmap
-* LangChain DataLoader
+* 
 * Webhook support to notify when source documents/conversations have been updated
 * Support for write scopes for each connector, in addition to read scopes
 
