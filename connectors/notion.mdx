@@ -21,13 +21,12 @@ By default, Psychic will use our Notion OAuth credentials to connect to your cus
 1. [Create a Notion integration](https://developers.notion.com/docs/create-a-notion-integration)
 2. [Make your integration public](https://developers.notion.com/docs/authorization#how-to-make-an-integration-public).
 3. Update the Notion configuration in the [Psychic Dashboard](https://dashboard.psychic.dev/connectors/notion) with the values below.
+    - The Notion OAuth client ID
+    - The Notion OAuth client secret
+    - The Notion authorization URL
+    These can be found on the Secrets page of your public [Notion integration](https://www.notion.so/my-integrations)
 
-These can be found on the Secrets page of your public [Notion integration](https://www.notion.so/my-integrations)
-- The Notion OAuth client ID
-- The Notion OAuth client secret
-- The Notion authorization URL
-
-The redirect URI is always `https://dashboard.psychic.dev/oauth/redirect`.
+The redirect URI is `https://dashboard.psychic.dev/oauth/redirect` if you are using Psychic's OAuth app. If you are using custom credentials, you'll need to set up your own endpoint to handle the redirect and auth code exchange.
 
 ![](https://user-images.githubusercontent.com/14931371/236308070-b1ddf760-c85e-48be-8510-b0aa6919d47f.png)
 
