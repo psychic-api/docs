@@ -4,12 +4,14 @@ description: "Connect to your user's accounts with LangChain"
 ---
 ETA: ⏱️ 30 minutes
 
-# ⚡️ Psychic Quickstart
+## Background
 When building AI assistants and other products with large language models, it's necessary to connect the LLM to source of knowledge.
 Sometimes these can be PDFs or public facing websites, but the majority of institutional knowledge is held in data silos managed by an application.
-In order to connect to these sources of knowledge, developers need to *authorize* with the application, *sync* data from the application's API, and finally *transform* the data into text-based documents that can be retrieved using LangChain or other LLM orchestration libraries.
+
+In order to connect to these sources of knowledge, developers need to **authorize** with the application, **sync** data from the application's API, and **transform** the data into text-based documents that can be retrieved using LangChain or other LLM orchestration libraries.
 Psychic lets developers do all three with a single integration, without having to familiarize themselves with the quirks of each application's auth flows, API endpoints, and data formats.
 
+# ⚡️ Psychic Quickstart
 In this quickstart, you'll set up a connection with an API of your choice, use the Psychic Python SDK to fetch documents from that API, and use LangChain/Chroma/OpenAi to set up a retrieval service to ask questions about those documents. 
 
 We will also integrate Psychic into your application to connect to data from your user's accounts on Notion, Google Drive, or any other connector Psychic supports.
