@@ -11,10 +11,13 @@
     "light": "#4D9CFF",
     "dark": "#0050B4"
   },
-  "topbarLinks": [],
-  "topbarCtaButton": {
+  "topbarLinks": [{
     "name": "Sign In",
     "url": "https://dashboard.psychic.dev"
+  }],
+  "topbarCtaButton": {
+    "type": "github",
+    "url": "https://github.com/psychic-api/psychic"
   },
   "anchors": [
     {
@@ -45,7 +48,7 @@
     },
     {
       "group": "Connectors",
-      "pages": ["connectors/confluence", "connectors/gdrive", "connectors/notion", "connectors/slack", "connectors/zendesk"]
+      "pages": ["connectors/confluence", "connectors/gdrive", "connectors/notion", "connectors/slack", "connectors/zendesk", "connectors/dropbox", "connectors/hubspot", "connectors/intercom", "connectors/salesforce"]
     },
     {
       "group": "API Reference",

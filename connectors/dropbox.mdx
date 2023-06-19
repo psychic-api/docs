@@ -1,0 +1,24 @@
+---
+title: Dropbox
+description: "Connect to the Dropbox API and use files from a Dropbox account as a knowledge source."
+---
+<Warning>**The Dropbox connector is still in alpha.** It's not guaranteed to be stable and may not support all relevant Dropbox endpoints. [Contribute a PRs](https://github.com/psychic-api/psychic/fork) to help improve the reliability of this connector!</Warning>
+
+The `connector_id` for Dropbox is `dropbox`.
+
+Psychic supports downloading files from Dropbox's [Files APIs](https://www.dropbox.com/developers/documentation/http/documentation#files-download).
+
+## Authorization Type
+Psychic uses [OAuth 2.0](https://developers.dropbox.com/oauth-guide) to connect to Dropbox.
+
+## Authorization Flow
+TBD
+
+## Configuration
+
+### Custom OAuth Credentials
+By default, Psychic will use our Dropbox OAuth credentials. The Dropbox connector does not currently support custom credentials, if you need this [let us know](https://join.slack.com/t/psychicapi/shared_invite/zt-1ty1wz6w0-8jkmdvBpM5kj_Fh30EiCcg).
+
+## Synchronization
+Dropbox Documents can be fetched as-neded from the `/get-documents` endpoint. 
+It's also possible to set up 24 hour syncs by providing a webhook URL in the [dashboard](https://dashboard.psychic.dev/syncs)
