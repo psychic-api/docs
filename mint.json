@@ -26,11 +26,6 @@
       "url": "api-reference"
     },
     {
-      "name": "Github",
-      "icon": "github",
-      "url": "https://github.com/psychic-api/psychic"
-    },
-    {
       "name": "Community",
       "icon": "slack",
       "url": "https://join.slack.com/t/psychicapi/shared_invite/zt-1ty1wz6w0-8jkmdvBpM5kj_Fh30EiCcg"
