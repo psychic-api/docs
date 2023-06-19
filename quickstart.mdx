@@ -48,7 +48,10 @@ If you see the documents you shared in the results, it means that you've success
 
 <Tip>You can also set `chunked=true` in your request to get back documents that are split into segments between `min_chunk_size` and `max_chunk_size`. Psychic employs a chunking strategies that attempts to keep relevant sections together.</Tip>
 
-## Ask questions about your documents
+## Ask questions about your documents using LangChain
+
+<Note>**This step is optional.** If you already have downstream infrastructure to vectorize these documents and use them in your application, you can skip this step.</Note>
+
 Clone the [quickstart repo](https://github.com/psychic-api/psychic-quickstart) and following the instructions to run it.
 Be sure to substitute your own OpenAI API key and Psychic secret key, as well as the `account_id` you used to create a connection.
 <Frame><img src="https://github.com/psychic-api/docs/assets/14931371/3870e96d-bd40-42fa-9513-140336011b49"/></Frame>
