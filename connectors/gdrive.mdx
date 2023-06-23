@@ -6,23 +6,35 @@ description: "Connect to the Google Drive API and use PDFs and Docs from a Drive
 The `connector_id` for Notion is `gdrive`.
 
 ## Authorization Type
-SidekiPsychicck uses Google's [OAuth 2.0 implementation](https://developers.google.com/identity/openid-connect/openid-connect) to connect to Google Drive.
+Psychic uses Google's [OAuth 2.0 implementation](https://developers.google.com/identity/openid-connect/openid-connect) to connect to Google Drive.
 
 ## Authorization Flow
-When your users authorize their Google account, they will need to enter the URL of a folder in their Drive that contains the documents they want to sync.
-<Accordion title="Show screenshots">
-<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/b39adf9d-f8b8-4473-89c3-bdc6b73fea4a" />
-<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/df12972f-0d5c-44b3-b21a-e3a4e6100cc4" />
-</Accordion>
-<Note>Psychic is still awaiting approval from Google Cloud for our OAuth application. This means your users will see a warning when connecting their Google account. 
-They will need to click on "Advanced" in the warning page to bypass it.</Note>
-<Frame>
-<img width="400" src="https://github.com/psychicapi/docs/assets/14931371/54edad5a-bcd2-4b4d-a77e-f949422ed0f4" />
-</Frame>
+After your users authorize their Google account, they will be able to pick the specific files they want to share in the Google Drive picker.
+
+![](https://github.com/psychic-api/docs/assets/13636019/3724fbf4-d814-4476-b8a7-7fe4499bbb80)
 
 ## Configuration
 
-There are no configuration options for Google Drive at the moment.
+### Custom OAuth Credentials
+
+![](https://github.com/psychic-api/docs/assets/13636019/3fe220f2-dc72-4cde-96bf-fd2950f9dd32)
+
+1. Go to  `APIs and Services` > `Enabled APIs and Services` in your Google Cloud console, click on the button titled `ENABLE APIS AND SERVICES`, and enable the Google Drive API.
+
+![](https://github.com/psychic-api/docs/assets/13636019/7d6dcd20-61f9-4971-89a2-488de59176ba)
+
+2. In the `Credentials` section, create an API key. Enter this API key into the Psychic dashboard in the `Developer Key` field.
+
+![](https://github.com/psychic-api/docs/assets/13636019/51a2d258-dddb-494a-b1f3-990b44dc8a38)
+
+3. Create another credential, except this time it should be an OAuth client ID. Download the Client secrets for your Oauth client as a JSON. Enter this JSON into the Psychic dashboard in the `Client Secret JSON` field. 
+
+![](https://github.com/psychic-api/docs/assets/13636019/38b6e681-2af2-422e-8aad-356d0378d4dd)
+
+4. Enter `https://link.psychic.dev` as an authorized JavaScript origin and `https://link.psychic.dev/oauth/redirect` as an authorized redirect URI in the Google OAuth client.
+
+![](https://github.com/psychic-api/docs/assets/13636019/4df52277-5d02-4e0f-9748-e0a422ffac24)
+![](https://github.com/psychic-api/docs/assets/13636019/359f3494-e321-4eb3-91c7-baafff9297f6)
 
 ## Synchronization
 Google Drive `docx`, `pdf` and `txt` files can be fetched as-neded from the `/get-documents` endpoint. 
