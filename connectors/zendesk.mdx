@@ -18,7 +18,15 @@ Psychic uses [OAuth 2.0](https://developer.zendesk.com/documentation/ticketing/w
 ## Configuration
 
 ### Custom OAuth Credentials
-The Zendesk connector requires the end user to know the subdomain of the Zendesk account they want to connect to.
+1. Go to Apps & Integrations > APIs > Zendesk API > OAuth Clients in your Zendesk Admin Center and click the button titled `Add OAuth Client`.
+
+![](https://github.com/psychic-api/docs/assets/13636019/b106ca87-4c3e-42a0-9cf3-de01c487a0a5)
+
+2. When creating the OAuth client make sure to enable the Psychic redirect url `https://link.psychic.dev/oauth/redirect`. Enter the client ID and client secret from Zendesk and enter them into the Psychic dashboard.
+
+![](https://github.com/psychic-api/docs/assets/13636019/56689804-c5da-4026-abcd-c42aab61e700)
+
+3. By default, your OAuth client will only be able to authenticate **your own Zendesk account**. To authenticate your customers' Zendesk accounts, you will need to submit a request to get your OAuth client approved as a [Global OAuth Client](https://developer.zendesk.com/documentation/marketplace/building-a-marketplace-app/set-up-a-global-oauth-client/).
 
 ## Synchronization
 Zendesk Documents can be fetched as-neded from the `/get-documents` endpoint. 
