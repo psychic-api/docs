@@ -26,9 +26,13 @@ By default, Psychic will use our Notion OAuth credentials to connect to your cus
     - The Notion authorization URL
     These can be found on the Secrets page of your public [Notion integration](https://www.notion.so/my-integrations)
 
-The redirect URI is `https://dashboard.psychic.dev/oauth/redirect` if you are using Psychic's OAuth app. If you are using custom credentials, you'll need to set up your own endpoint to handle the redirect and auth code exchange.
+The redirect URI is `https://link.psychic.dev/oauth/redirect`. If you want us to deploy the link webapp to your own custom url, reach out to us on Slack.
 
 ![](https://user-images.githubusercontent.com/14931371/236308070-b1ddf760-c85e-48be-8510-b0aa6919d47f.png)
+
+4. Make sure to go to Distribution > OAuth Domain & URIs and enable the Psychic redirect url.
+
+![]((https://github.com/psychic-api/docs/assets/13636019/e2bdaa8d-20d0-4de4-b16d-5eac6294d7c7)
 
 ## Synchronization
 Notion Documents can be fetched from the `/get-documents` endpoint on an as-needed basis. 
