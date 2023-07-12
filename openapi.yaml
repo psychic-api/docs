@@ -113,9 +113,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Document"      
+                $ref: "#/components/schemas/GetDocumentsResponse"      
         '400':
           description: Bad Request
           content:
@@ -144,13 +142,44 @@ paths:
                   description: How far back to retrieve messages. Will retrieve messages from the past 24 hours if not provided.
       responses:
         '200':
-          description: Successfully retrieved Conversations
+          description: Successfully retrieved Messages
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Conversation"      
+                $ref: "#/components/schemas/GetConversationsResponse"     
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+  /get-tickets:
+    post:
+      description: Returns all Tickets for a given account and connector
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - connector_id
+                - account_id
+              properties:
+                connector_id:
+                  type: string
+                account_id:
+                  type: string
+                oldest_timestamp:
+                  type: integer
+                  description: How far back to retrieve messages. Will retrieve messages from the past 24 hours if not provided.
+      responses:
+        '200':
+          description: Successfully retrieved Tickets
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTicketsResponse"
         '400':
           description: Bad Request
           content:
@@ -217,6 +246,18 @@ components:
           type: string
         metadata:
           type: object
+    GetDocumentsResponse:
+      type: object
+      required:
+        - documents
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: "#/components/schemas/Document"
+        next_page_cursor:
+          type: string
+          description: A cursor to use to get the next page of documents. If not provided, there are no more pages.
     Document:
       type: object
       required:
@@ -233,7 +274,7 @@ components:
         uri:
           type: object
           description: A unique URL or ID that identifies the source document.
-    Conversation:
+    GetConversationsResponse:
       type: object
       required:
         - messages
@@ -242,45 +283,18 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Message"
-        channel:
-          type: object
-          properties:
-            name:
-              type: string
-            id:
-              type: string
+        next_page_cursor:
+          type: string
+          description: A cursor to use to get the next page of messages. If not provided, there are no more pages.
     Message:
       type: object
       required:
-        - id
-        - sender
         - content
       properties:
         id:
           type: string
-        sender:
-          $ref: "#/components/schemas/MessageSender"
         content:
           type: string
-        timestamp:
-          type: integer
-        replies:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              sender:
-                $ref: "#/components/schemas/MessageSender"
-              content:
-                type: string
-              timestamp:
-                type: integer
-              replies:
-                type: array
-                items:
-                  type: object
         uri:
           type: string
     MessageSender:
@@ -290,6 +304,18 @@ components:
           type: string
         name:
           type: string
+    GetTicketsResponse:
+      type: object
+      required:
+        - tickets
+      properties:
+        tickets:
+          type: array
+          items:
+            $ref: "#/components/schemas/Document"
+        next_page_cursor:
+          type: string
+          description: A cursor to use to get the next page of tickets. If not provided, there are no more pages.      
     QuestionResponse:
       type: object
       properties:

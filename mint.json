@@ -43,14 +43,14 @@
     },
     {
       "group": "Connectors",
-      "pages": ["connectors/confluence", "connectors/gdrive", "connectors/notion", "connectors/slack", "connectors/zendesk", "connectors/dropbox", "connectors/hubspot", "connectors/intercom", "connectors/salesforce"]
+      "pages": ["connectors/confluence", "connectors/gdrive", "connectors/notion", "connectors/slack", "connectors/zendesk", "connectors/dropbox", "connectors/hubspot", "connectors/intercom", "connectors/salesforce", "connectors/gmail", "connectors/sharepoint", "connectors/readme", "connectors/website", "connectors/github"]
     },
     {
       "group": "API Reference",
       "pages": ["api-reference/authentication", 
       {
         "group": "Endpoints",
-        "pages": ["api-reference/endpoint/get-documents", "api-reference/endpoint/get-conversations", "api-reference/endpoint/get-connections", "api-reference/endpoint/get-connector-status"]
+        "pages": ["api-reference/endpoint/get-documents", "api-reference/endpoint/get-conversations", "api-reference/endpoint/get-tickets", "api-reference/endpoint/get-connections", "api-reference/endpoint/get-connector-status"]
       }]
     }
   ],
